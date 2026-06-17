@@ -454,7 +454,6 @@
             class="container d-flex flex-column flex-sm-row justify-content-between align-items-center text-center text-sm-start gap-2">
             <div class="d-flex flex-column flex-sm-row gap-1 gap-sm-4 align-items-center">
                 <div class="small">
-                    <!-- ईमेल फिक्स: क्लिक करते ही मेलबॉक्स खुलेगा -->
                     <i class="fa-solid fa-envelope text-info me-1"></i>
                     <a href="mailto:ahamadmdistiyaque@gmail.com" class="text-light">ahamadmdistiyaque@gmail.com</a>
                 </div>
@@ -734,7 +733,6 @@
         </div>
     </div>
 
-    <!-- ================= ONLINE PAYMENT GATEWAY MODULE (100% FIXED QR) ================= -->
     <div class="container py-4 reveal-element">
         <div class="p-4 rounded-4 shadow-sm text-center bg-white border border-primary">
             <h6 id="text-pay-sub" class="text-primary fw-bold text-uppercase small"><i
@@ -749,7 +747,6 @@
                         <p class="mb-2 text-dark font-weight-bold small"><strong>UPI ID:</strong> <span
                                 class="text-primary">9123188984@ybl</span></p>
                         <p class="mb-3 text-dark small"><strong>Merchant:</strong> Suraksha Vision</p>
-                        <!-- डायरेक्ट मोबाइल पेमेंट्स के लिए डीपलिंकिंग बटन -->
                         <a href="upi://pay?pa=9123188984@ybl&pn=Suraksha%20Vision&cu=INR"
                             class="btn btn-primary rounded-pill btn-sm fw-bold px-4">
                             <i class="fa-solid fa-bolt me-1"></i> Pay via UPI App
@@ -758,7 +755,6 @@
                 </div>
                 <div class="col-12 col-md-2 text-muted small fw-bold">OR / YA</div>
                 <div class="col-12 col-md-4 text-center">
-                    <!-- यूआरएल एनकोडेड 100% वर्किंग लाइव क्यूआर कोड जनरेटर -->
                     <div class="p-2 border rounded-3 bg-white d-inline-block shadow-sm">
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi%3A%2F%2Fpay%3Fpa%3D9123188984%40ybl%26pn%3DSuraksha%2520Vision%26cu%3DINR"
                             alt="UPI QR Code" class="img-fluid" style="width: 140px; height: 140px;">
@@ -770,7 +766,6 @@
         </div>
     </div>
 
-    <!-- ================= CUSTOMER FEEDBACK SECTION ================= -->
     <div class="container py-4 reveal-element">
         <div class="p-4 rounded-4 shadow-sm" style="background-color: white; border-top: 4px solid #22c55e;">
             <div class="text-center mb-4">
@@ -779,7 +774,7 @@
                 <p id="text-feed-p" class="text-muted small">Aapka anubhav humare liye mahatvapurna hai.</p>
             </div>
             <form action="https://api.web3forms.com/submit" method="POST">
-                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+                <input type="hidden" name="access_key" value="757084e0-2f34-47ce-94e2-2c04b8b2d8c1">
                 <input type="hidden" name="subject" value="New Customer Feedback - Suraksha Vision">
                 <div class="row g-3">
                     <div class="col-12 col-md-6">
@@ -817,7 +812,7 @@
                     <h4 id="text-form-title" class="fw-bold mb-1 text-dark fs-5">Get a Free Quote</h4>
                     <p id="text-form-desc" class="text-muted small mb-3">Apna details bharein, hum contact karenge.</p>
                     <form action="https://api.web3forms.com/submit" method="POST">
-                        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+                        <input type="hidden" name="access_key" value="757084e0-2f34-47ce-94e2-2c04b8b2d8c1">
                         <input type="hidden" name="subject" value="New Service Quote Request - Suraksha Vision">
                         <div class="mb-2">
                             <label id="text-lbl-name" class="form-label small fw-semibold mb-1">Aapka Naam</label>
@@ -851,10 +846,10 @@
                     <div class="alert alert-warning py-1 px-2 mb-3 rounded-3 border-0 small" style="font-size: 0.8rem;">
                         <i class="fa-solid fa-circle-exclamation me-1"></i> <span id="text-job-notice">Mandatory:
                             Applying candidate must possess a personal bike, valid driving license, and standard
-                            verification documents (Aadhaar Card, ID proof).</span>
+                            verification documents (ID proof).</span>
                     </div>
                     <form action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+                        <input type="hidden" name="access_key" value="757084e0-2f34-47ce-94e2-2c04b8b2d8c1">
                         <input type="hidden" name="subject" value="New Job Application with CV - Suraksha Vision">
                         <div class="mb-2">
                             <label id="text-lbl-jobname" class="form-label small fw-semibold mb-1">Full Name</label>
@@ -931,7 +926,6 @@
                     <p class="mb-1 small"><i class="fa-solid fa-phone text-warning me-1"></i> <strong
                             id="text-foot-call">Call:</strong> +91 9123188984</p>
 
-                    <!-- ईमेल फिक्स: क्लिक करते ही मेलबॉक्स डायरेक्ट रीडायरेक्ट करेगा -->
                     <p class="mb-1 small">
                         <i class="fa-solid fa-envelope text-info me-1"></i>
                         <strong id="text-foot-email">Email:</strong>
@@ -970,7 +964,6 @@
         </div>
     </div>
 
-    <!-- ================= AI CHATBOT INTERACTIVE WIDGET ================= -->
     <div class="chatbot-launcher" onclick="toggleChatbot()">
         <i class="fa-solid fa-robot" id="chat-icon"></i>
     </div>
@@ -1155,7 +1148,7 @@
                 formBtn: 'Submit Requirement',
                 jobTitle: '<i class="fa-solid fa-briefcase text-warning me-1"></i>Join Our Team',
                 jobDesc: 'Apni CV yahan submit karein.',
-                jobNotice: 'Mandatory: Applying candidate must possess a personal bike, valid driving license, and standard verification documents (Aadhaar Card, ID proof).',
+                jobNotice: 'Mandatory: Applying candidate must possess a personal bike, valid driving license, and standard verification documents (ID proof).',
                 lblJobname: 'Pura Naam',
                 lblJobprofile: 'Aapka Profile / Role',
                 lblCv: 'Upload CV (PDF)',
@@ -1253,7 +1246,7 @@
                 formBtn: 'Submit Requirement',
                 jobTitle: '<i class="fa-solid fa-briefcase text-warning me-1"></i>Join Our Team',
                 jobDesc: 'Submit your CV here.',
-                jobNotice: 'Mandatory: Applying candidate must possess a personal bike, valid driving license, and standard verification documents (Aadhaar Card, ID proof).',
+                jobNotice: 'Mandatory: Applying candidate must possess a personal bike, valid driving license, and standard verification documents (ID proof).',
                 lblJobname: 'Full Name',
                 lblJobprofile: 'Your Profile / Role',
                 lblCv: 'Upload CV (PDF)',
