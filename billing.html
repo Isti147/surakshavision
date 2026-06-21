@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sureksha Vision - Enterprise Master Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            color: #333333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Login Screen Styles */
+        #loginWrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #1a365d 0%, #0f1d36 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .login-box {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            color: #1a365d;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .login-box p { color: #d4af37; font-weight: 600; margin-top: 0; margin-bottom: 25px; }
+        .login-box input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 14px; }
+        .login-box button { width: 100%; padding: 12px; background-color: #1a365d; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 5px; }
+        .login-box button:hover { background-color: #2980b9; }
+
+        .login-footer-actions { display: flex; justify-content: center; align-items: center; margin-top: 15px; font-size: 13px; }
+        .forgot-link { cursor: pointer; font-weight: bold; color: #2980b9; text-decoration: none; }
+        .forgot-link:hover { text-decoration: underline; }
+        .error-msg { color: #e74c3c; font-size: 13px; margin-bottom: 10px; display: none; font-weight: 600; }
+
+        /* Company Header Branding */
+        .company-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #1a365d; padding-bottom: 20px; margin-bottom: 20px; }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid #d4af37; }
+        .company-title h1 { margin: 0; font-size: 32px; color: #1a365d; font-weight: bold; text-transform: uppercase; }
+        .company-title .hindi-tag { margin: 2px 0; font-size: 16px; color: #d4af37; font-weight: bold; }
+        .company-title .eng-tag { margin: 0; font-size: 13px; color: #7f8c8d; font-weight: 600; text-transform: uppercase; }
+        .contact-info { text-align: right; font-size: 13px; line-height: 1.6; color: #444; max-width: 400px; }
+        .contact-info a { color: #1a365d; text-decoration: none; font-weight: 600; }
+
+        /* Active User Dashboard Bar */
+        .user-bar { background-color: #2c3e50; color: #fff; padding: 8px 15px; font-size: 13px; border-radius: 4px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .logout-link { color: #ff7675; text-decoration: none; font-weight: bold; cursor: pointer; }
+
+        /* Admin Management Hub Style */
+        .admin-hub { background-color: #fcf3cf; border: 1px solid #f4d03f; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
+        .admin-hub h4 { margin: 0 0 10px 0; color: #7d6608; text-transform: uppercase; font-size: 13px; }
+        .admin-flex { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; background: #fff; padding: 10px; border-radius: 5px; border: 1px solid #f1c40f; }
+        .admin-flex input, .admin-flex select { padding: 6px 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; min-width: 120px; }
+        .admin-btn { background-color: #7d6608; color: white; border: none; padding: 7px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .user-tag-list { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .user-tag { background: #f9e79f; color: #7d6608; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; display: flex; align-items: center; gap: 8px; }
+        .mod-pass-btn { color: #2980b9; cursor: pointer; text-decoration: underline; margin-left: 5px; font-size: 11px; }
+        .view-bills-btn { color: #27ae60; cursor: pointer; text-decoration: underline; margin-left: 5px; font-size: 11px; font-weight: bold; }
+        .del-user-btn { color: #cc2424; cursor: pointer; font-weight: bold; font-size: 14px; }
+
+        /* Saved Bills History Panel */
+        .history-hub { background-color: #ebf5fb; border: 1px solid #5faee3; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
+        .history-hub h4 { margin: 0 0 10px 0; color: #1f618d; text-transform: uppercase; font-size: 13px; }
+        
+        .history-controls { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+        .history-controls input, .history-controls select { padding: 8px 12px; border: 1px solid #85c1e9; border-radius: 4px; font-size: 13px; outline: none; }
+        .history-controls input { flex: 1; min-width: 200px; }
+        .history-controls select { min-width: 180px; background-color: #fff;}
+
+        .history-table { width: 100%; border-collapse: collapse; background: #fff; }
+        .history-table th { background-color: #2e86c1; color: white; font-size: 12px; padding: 6px; border: 1px solid #add8e6; }
+        .history-table td { padding: 6px; font-size: 13px; border: 1px solid #add8e6; }
+        .action-btn { padding: 3px 8px; border: none; border-radius: 3px; font-size: 11px; font-weight: bold; cursor: pointer; margin-right: 5px; }
+        .load-btn { background-color: #27ae60; color: white; }
+        .remove-btn { background-color: #e74c3c; color: white; }
+
+        /* Control Panel Styles */
+        .control-panel { background-color: #e8f4fd; border: 1px solid #bce0fd; padding: 15px; border-radius: 6px; margin-bottom: 20px; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+        .control-group { display: flex; align-items: center; gap: 10px; }
+        .control-panel label { font-weight: bold; color: #1a365d; font-size: 14px; }
+        .control-panel select { padding: 8px 12px; font-size: 14px; border-radius: 4px; border: 1px solid #1a365d; cursor: pointer; font-weight: 600; background-color: #fff; }
+        .save-db-btn { background-color: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 13px; }
+        .reset-form-btn { background-color: #e67e22; color: white; border: none; padding: 10px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 13px; margin-left: auto;}
+
+        .invoice-title-bar { text-align: center; background-color: #1a365d; color: #ffffff; font-weight: bold; font-size: 18px; padding: 8px; letter-spacing: 1px; margin-bottom: 20px; border-radius: 4px; text-transform: uppercase; }
+
+        /* Customer & Invoice Info Grid */
+        .meta-container { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
+        .meta-box { flex: 1; padding: 12px; border: 1px solid #dddddd; background-color: #fafbfc; border-radius: 4px; font-size: 14px; line-height: 1.8; }
+        .meta-title { font-weight: bold; color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 4px; margin-bottom: 8px; text-transform: uppercase; font-size: 13px; }
+
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 10px 12px; text-align: left; border: 1px solid #dddddd; font-size: 14px; }
+        th { background-color: #1a365d; color: #ffffff; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+        input[type="number"], input[type="text"] { width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; }
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+        .total-field { font-weight: bold; color: #1a365d; }
+        .select-col { text-align: center; width: 50px; }
+        .select-col input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
+
+        .summary-wrapper { display: flex; justify-content: flex-end; margin-bottom: 20px; }
+        .summary-table { width: 350px; }
+        .grand-total-row { background-color: #ecf0f1; font-weight: bold; font-size: 16px; }
+
+        .footer-panel { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 30px; }
+        .terms-box { font-size: 12px; color: #555555; max-width: 50%; line-height: 1.6; }
+        .terms-box ol { padding-left: 20px; margin: 5px 0; }
+        .sign-box { text-align: right; font-size: 14px; position: relative; width: 250px; }
+        .digital-signature-badge { font-family: 'Courier New', Courier, monospace; color: #00b894; font-size: 12px; font-weight: bold; border: 2px dashed #00b894; padding: 6px; border-radius: 5px; display: inline-block; text-align: center; line-height: 1.3; background-color: #f6fffb; transform: rotate(-2deg); margin-top: 15px; margin-bottom: 5px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05); }
+        .sign-line { border-top: 1px dashed #333333; width: 200px; margin-left: auto; margin-top: 10px; padding-top: 5px; text-align: center; font-weight: bold; color: #1a365d; }
+
+        .print-btn { display: block; width: 180px; margin: 25px auto 0; padding: 12px; background-color: #27ae60; color: white; text-align: center; border: none; border-radius: 4px; cursor: pointer; font-size: 15px; font-weight: bold; }
+        .print-btn:hover { background-color: #219653; }
+        .hidden-mode { display: none !important; }
+
+        @media print {
+            .print-btn, .control-panel, .user-bar, .admin-hub, .history-hub, input[type="text"], input[type="number"] { border: none; background: transparent; padding: 0; }
+            .control-panel, .user-bar, .admin-hub, .history-hub, .select-col, th:first-child, td:first-child { display: none !important; }
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            input::placeholder { color: transparent; }
+            .item-row.hide-on-print, .tax-row.hide-tax-print { display: none !important; }
+        }
+    </style>
+</head>
+
+<body class="mode-quotation">
+
+    <div id="loginWrapper">
+        <div class="login-box">
+            <h2>Sureksha Vision</h2>
+            <p>Secure Enterprise Terminal</p>
+            <div id="loginError" class="error-msg">Invalid Email ID or Password!</div>
+            <input type="text" id="usernameInput" placeholder="Enter Registered Email ID">
+            <input type="password" id="passwordInput" placeholder="Enter Password">
+            <button onclick="handleSystemLogin()">Secure Login</button>
+
+            <!-- ONLY FORGOT PASSWORD BUTTON HERE NOW -->
+            <div class="login-footer-actions">
+                <a class="forgot-link" onclick="handleForgotPasswordReset()">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="user-bar">
+            <div>🔒 Logged in as: <strong id="activeUserLabel"></strong> (<span id="activeRoleLabel"></span>)</div>
+            <div class="logout-link" onclick="handleSystemLogout()">Logout Node ✖</div>
+        </div>
+
+        <div id="adminManagementHub" class="admin-hub hidden-mode">
+            <h4>🔑 Admin User Management Panel (Proprietor Only Control)</h4>
+            <div class="admin-flex">
+                <input type="text" id="newStaffName" placeholder="Full Name" style="width: 150px;">
+                <input type="text" id="newStaffID" placeholder="Email ID (Login ID)" style="width: 180px;">
+                <input type="text" id="newStaffPass" placeholder="Strong Password*" style="width: 150px;" title="At least 8 chars, 1 Upper, 1 Lower, 1 Num, 1 Symbol">
+                <select id="newStaffRole" style="width: 150px;">
+                    <option value="Service Engineer">Service Engineer</option>
+                    <option value="Network Specialist">Network Specialist</option>
+                    <option value="Accounts Executive">Accounts Executive</option>
+                </select>
+                <input type="text" id="newStaffContact" placeholder="Contact No" style="width: 120px;">
+                <select id="newStaffGender" style="width: 100px;">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input type="number" id="newStaffAge" placeholder="Age" style="width: 60px;">
+                <input type="text" id="newStaffAadhar" placeholder="Aadhar Info" style="width: 150px;">
+
+                <button class="admin-btn" id="addUpdateUserBtn" onclick="addNewUserCore()">+ Add User</button>
+                <button class="admin-btn" id="cancelEditBtn" style="display:none; background-color:#7f8c8d;" onclick="resetAdminForm()">Cancel Edit</button>
+            </div>
+            <div class="user-tag-list" id="activeUsersContainer"></div>
+        </div>
+
+        <div id="invoiceHistoryHub" class="history-hub hidden-mode">
+            <h4>🗄️ Saved Bills & Estimates Database Log (Admin Superuser View)</h4>
+            
+            <div class="history-controls">
+                <input type="text" id="searchBillInput" placeholder="🔍 Search by Customer Phone or Bill No..." onkeyup="filterHistoryTable()">
+                <select id="filterStaffSelect" onchange="filterHistoryTable()">
+                    <option value="All">Show All Staff Bills</option>
+                </select>
+            </div>
+
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Invoice No</th>
+                        <th>Customer Name</th>
+                        <th>Phone</th>
+                        <th>Date</th>
+                        <th>Mode</th>
+                        <th>Grand Total</th>
+                        <th>Billed By</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="historyLogContainer">
+                    <tr><td colspan="8" class="text-center" style="color: gray; font-style: italic;">No records found.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="company-header">
+            <div class="logo-area">
+                <img src="WhatsApp Image 2026-06-21 at 10.19.58 AM.jpeg" class="logo-img" alt="Sureksha Vision Logo">
+                <div class="company-title">
+                    <h1>Sureksha Vision</h1>
+                    <div class="hindi-tag">सीसीटीवी इंस्टॉलेशन और आईटी SERVICES</div>
+                    <div class="eng-tag">CCTV Installation & IT Services</div>
+                </div>
+            </div>
+            <div class="contact-info">
+                <strong>🌐 Web:</strong> <a href="http://www.surekshavision.com" target="_blank">www.surekshavision.com</a><br>
+                <strong>📧 Email:</strong> <a href="mailto:razamdfurquan@gmail.com">razamdfurquan@gmail.com</a><br>
+                <strong>📞 Call/WA:</strong> +91 91231 88984<br>
+                <strong>📍 Address:</strong> jamsaut usri bandh danapur sivala road patna bihar - 801503
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <div class="control-group">
+                <label for="systemMode">🛠️ Select Mode:</label>
+                <select id="systemMode" onchange="switchSystemMode()">
+                    <option value="quotation">Rough Quotation Mode (Checkbox Choice)</option>
+                    <option value="invoice">Original Bill Mode (Auto-hide 0 Qty Items)</option>
+                </select>
+            </div>
+
+            <div class="control-group" id="taxStatusGroup">
+                <label for="taxStatus">🧾 GST Status:</label>
+                <select id="taxStatus" onchange="runLiveCalculations()">
+                    <option value="yes">With GST (18% Tax Invoice)</option>
+                    <option value="no">Without GST (0% Estimate/Cash Memo)</option>
+                </select>
+            </div>
+
+            <button class="save-db-btn" onclick="commitCurrentBillToLog()">💾 Save Bill to History Log</button>
+            <button class="reset-form-btn" onclick="resetBillingFormWorkspace()">🔄 Reset Form (New Bill)</button>
+        </div>
+
+        <div id="documentTitle" class="invoice-title-bar">SYSTEM ESTIMATE & QUOTATION</div>
+
+        <div id="customerMetaPanel" class="meta-container hidden-mode">
+            <div class="meta-box">
+                <div class="meta-title">Billed To (Customer Details)</div>
+                <strong>Client Name:</strong> <input type="text" id="custName" style="width:70%" placeholder="Customer Name"><br>
+                <strong>Site Address:</strong> <input type="text" id="custAddr" style="width:70%" placeholder="Installation Address"><br>
+                <strong>Contact No:</strong> <input type="text" id="custPhone" style="width:70%" placeholder="Phone Number"><br>
+                <strong>GSTIN (If any):</strong> <input type="text" style="width:67%" placeholder="Optional">
+            </div>
+            <div class="meta-box">
+                <div class="meta-title">Invoice Details</div>
+                <strong>Invoice No:</strong> <input type="text" id="invNumber" style="width:65%" placeholder="e.g. SV/2026/01"><br>
+                <strong>Date:</strong> <input type="text" id="invDate" style="width:78%" value="21-Jun-2026"><br>
+                <strong>Place of Supply:</strong> Bihar (10)<br>
+                <strong>Payment Mode:</strong> <input type="text" id="invPayMode" style="width:60%" placeholder="UPI / Cash / Bank"><br>
+
+                <div id="operatorFieldHolder" style="margin-top: 5px; font-size: 13.5px; color: #1a365d;">
+                    <strong>Billed By:</strong> <span id="billOperatorLabel" style="font-weight: bold; color: #27ae60;"></span>
+                </div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="select-col" style="width: 6%">Select</th>
+                    <th style="width: 5%">S.No</th>
+                    <th style="width: 44%">Product / Service Description</th>
+                    <th style="width: 15%">Brand / Model</th>
+                    <th style="width: 8%">Qty</th>
+                    <th style="width: 10%">Rate (₹)</th>
+                    <th style="width: 12%">Total (₹)</th>
+                </tr>
+            </thead>
+            <tbody id="inventoryItemsContainer">
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">1</td>
+                    <td class="p-desc">Surveillance Camera (Outdoor Bullet / Indoor Dome)</td>
+                    <td><input type="text" class="p-brand" value="CP Plus / Hikvision"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="1850" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">2</td>
+                    <td class="p-desc">Network Video Recorder (NVR / DVR Recorder)</td>
+                    <td><input type="text" class="p-brand" value="CP Plus / Hikvision"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="4200" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">3</td>
+                    <td class="p-desc">Surveillance Hard Disk Drive (HDD)</td>
+                    <td><input type="text" class="p-brand" value="WD Purple / Seagate Skyhawk"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="4500" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">4</td>
+                    <td class="p-desc">PoE Switch / Centralized Power Supply</td>
+                    <td><input type="text" class="p-brand" value="TP-Link / Digisol"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="2800" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">5</td>
+                    <td class="p-desc">LED Monitor Screen & Connectivity Cables</td>
+                    <td><input type="text" class="p-brand" value="LG / Samsung 19 Inch"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="4800" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">6</td>
+                    <td class="p-desc">High-Quality Cat6 Network Cable / Coaxial Cable</td>
+                    <td><input type="text" class="p-brand" value="D-Link Box (90m)"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="1800" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">7</td>
+                    <td class="p-desc">PVC Casing / Pipe / Conduit Fitting</td>
+                    <td><input type="text" class="p-brand" value="Precision / AKG Heavy"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="45" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">8</td>
+                    <td class="p-desc">DVR / NVR Wall Mount Rack Box</td>
+                    <td><input type="text" class="p-brand" value="2U Smart Wall Mount Rack"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="1350" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">9</td>
+                    <td class="p-desc">PVC Waterproof Junction Box (4x4)</td>
+                    <td><input type="text" class="p-brand" value="Standard Double Lock Box"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="65" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">10</td>
+                    <td class="p-desc">Connectors Setup (RJ45 / BNC & DC Connectors)</td>
+                    <td><input type="text" class="p-brand" value="Premium Pure Copper Clips"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="25" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">11</td>
+                    <td class="p-desc">Power Extension Board / Spike Guard Surge Protector</td>
+                    <td><input type="text" class="p-brand" value="Anchor / Belkin 4-Way"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="550" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+                <tr class="item-row">
+                    <td class="select-col"><input type="checkbox" class="row-chk" onchange="toggleRowSelection(this)"></td>
+                    <td class="sn">12</td>
+                    <td class="p-desc">Installation, System Integration & Commissioning Charges</td>
+                    <td><input type="text" class="p-brand" value="Sureksha Vision Standard"></td>
+                    <td><input type="number" class="qty" value="0" oninput="runLiveCalculations()"></td>
+                    <td><input type="number" class="rate" value="450" oninput="runLiveCalculations()"></td>
+                    <td class="total-field text-right">0.00</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="summary-wrapper">
+            <table class="summary-table">
+                <tr id="subtotalRow" class="tax-row">
+                    <td><strong>Sub-Total Amount:</strong></td>
+                    <td id="sub-total" class="text-right total-field">₹ 0.00</td>
+                </tr>
+                <tr class="tax-row" id="cgst-row">
+                    <td><strong>CGST @ 9%:</strong></td>
+                    <td id="cgst" class="text-right">₹ 0.00</td>
+                </tr>
+                <tr class="tax-row" id="sgst-row">
+                    <td><strong>SGST @ 9%:</strong></td>
+                    <td id="sgst" class="text-right">₹ 0.00</td>
+                </tr>
+                <tr class="grand-total-row">
+                    <td><strong id="totalLabel">Grand Total (INR):</strong></td>
+                    <td id="grand-total" class="text-right" style="color:#1a365d;">₹ 0.00</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer-panel">
+            <div class="terms-box">
+                <strong>Terms & Conditions:</strong>
+                <ol>
+                    <li>All electronic core items carry standard manufacturer warranty rules.</li>
+                    <li>No warranty on physical damage, burning, or lightning shocks.</li>
+                    <li>Goods once sold or integrated at site will not be taken back.</li>
+                    <li>This is an official document generated by Sureksha Vision.</li>
+                </ol>
+            </div>
+            <div class="sign-box">
+                For <strong>Sureksha Vision</strong>
+                <div id="digitalSignatureNode"></div>
+                <div class="sign-line">Authorized Signatory</div>
+            </div>
+        </div>
+
+        <button class="print-btn" onclick="executeFinalPrint()">Print Document</button>
+    </div>
+
+    <script>
+        const masterAdminEmail = "ahamadmdistiyaque@gmail.com";
+        const masterAdminPass = "sureksha@123";
+        let editingUserId = null;
+
+        function initializeSystemDatabase() {
+            if (!localStorage.getItem('surekshaUsers')) {
+                const defaultUsers = {};
+                defaultUsers[masterAdminEmail] = {
+                    name: "Mohammad Istiyaque Ahamad", role: "Proprietor/Admin", code: "SV-AUTH/MIA-01",
+                    pass: masterAdminPass, isAdmin: true, email: masterAdminEmail,
+                    contact: "+91 91231 88984", gender: "Male", age: "25", aadhar: "[Aadhaar Redacted]"
+                };
+                defaultUsers["tech01@surekshavision.com"] = {
+                    name: "Technical Staff 1", role: "Service Engineer", code: "SV-AUTH/ENG-09",
+                    pass: "Tech@1234", isAdmin: false, email: "tech01@surekshavision.com",
+                    contact: "", gender: "Male", age: "", aadhar: ""
+                };
+                localStorage.setItem('surekshaUsers', JSON.stringify(defaultUsers));
+            }
+            if (!localStorage.getItem('surekshaInvoices')) {
+                localStorage.setItem('surekshaInvoices', JSON.stringify([]));
+            }
+        }
+
+        initializeSystemDatabase();
+        let currentUser = null;
+
+        function isStrongPassword(password) {
+            const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+            return strongRegex.test(password);
+        }
+
+        function handleSystemLogin() {
+            const uid = document.getElementById('usernameInput').value.trim().toLowerCase();
+            const pass = document.getElementById('passwordInput').value;
+            const errMsg = document.getElementById('loginError');
+            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+
+            let matchedUser = null;
+            for (let key in users) {
+                if (key.toLowerCase() === uid && users[key].pass === pass) {
+                    matchedUser = users[key];
+                    break;
+                }
+            }
+
+            if (matchedUser) {
+                currentUser = matchedUser;
+                document.getElementById('loginWrapper').style.setProperty('display', 'none', 'important');
+                document.getElementById('activeUserLabel').innerText = currentUser.name;
+                document.getElementById('activeRoleLabel').innerText = currentUser.role;
+                document.getElementById('billOperatorLabel').innerText = currentUser.name + " (" + currentUser.email + ")";
+
+                const adminPanel = document.getElementById('adminManagementHub');
+                const historyPanel = document.getElementById('invoiceHistoryHub');
+
+                if (currentUser.isAdmin && currentUser.email.toLowerCase() === masterAdminEmail.toLowerCase()) {
+                    adminPanel.classList.remove('hidden-mode');
+                    historyPanel.classList.remove('hidden-mode');
+                    renderActiveUsersTags();
+                    updateStaffFilterDropdown();
+                    filterHistoryTable();
+                } else {
+                    adminPanel.classList.add('hidden-mode');
+                    historyPanel.classList.add('hidden-mode');
+                }
+
+                injectDigitalSignature();
+                switchSystemMode();
+                errMsg.style.display = 'none';
+            } else {
+                errMsg.style.display = 'block';
+            }
+        }
+
+        function handleSystemLogout() {
+            currentUser = null;
+            editingUserId = null;
+            document.getElementById('usernameInput').value = "";
+            document.getElementById('passwordInput').value = "";
+            document.getElementById('loginWrapper').style.setProperty('display', 'flex', 'important');
+        }
+
+        function handleForgotPasswordReset() {
+            const uidInput = prompt("Enter your Registered Email ID to recover password:");
+            if (!uidInput) return;
+            const targetEmail = uidInput.trim().toLowerCase();
+            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            let matchedKey = null;
+            for (let key in users) { if (key.toLowerCase() === targetEmail) { matchedKey = key; break; } }
+            if (!matchedKey) { alert("❌ Email ID not found!"); return; }
+            const targetUser = users[matchedKey];
+            
+            const newPasswordValue = prompt(`[TESTING MODE] Enter new STRONG password for [${targetUser.name}]:\n(Min 8 chars, 1 Upper, 1 Lower, 1 Num, 1 Symbol)`);
+            if (newPasswordValue && newPasswordValue.trim() !== "") {
+                if(!isStrongPassword(newPasswordValue.trim())) {
+                    alert("❌ Password strong nahi hai!\nKam se kam 8 letters, 1 Bada akshar (A-Z), 1 Chhota (a-z), 1 Number (0-9) aur 1 Special Character (@, #, $ etc.) hona zaruri hai.");
+                    return;
+                }
+                users[matchedKey].pass = newPasswordValue.trim();
+                localStorage.setItem('surekshaUsers', JSON.stringify(users));
+                alert("Success! Password securely update ho gaya hai.");
+            }
+        }
+
+        function resetAdminForm() {
+            document.getElementById('newStaffName').value = "";
+            document.getElementById('newStaffID').value = "";
+            document.getElementById('newStaffID').disabled = false;
+            document.getElementById('newStaffPass').value = "";
+            document.getElementById('newStaffRole').value = "Service Engineer";
+            document.getElementById('newStaffContact').value = "";
+            document.getElementById('newStaffGender').value = "Male";
+            document.getElementById('newStaffAge').value = "";
+            document.getElementById('newStaffAadhar').value = "";
+            document.getElementById('addUpdateUserBtn').innerText = "+ Add User";
+            document.getElementById('cancelEditBtn').style.display = 'none';
+            editingUserId = null;
+        }
+
+        function addNewUserCore() {
+            if (!currentUser || !currentUser.isAdmin) return;
+            const sName = document.getElementById('newStaffName').value.trim();
+            const sID = document.getElementById('newStaffID').value.trim().toLowerCase();
+            const sPass = document.getElementById('newStaffPass').value;
+            const sRole = document.getElementById('newStaffRole').value;
+            const sContact = document.getElementById('newStaffContact').value.trim();
+            const sGender = document.getElementById('newStaffGender').value;
+            const sAge = document.getElementById('newStaffAge').value.trim();
+            const sAadhar = document.getElementById('newStaffAadhar').value.trim();
+
+            if (!sName || !sID) { alert("Name and Email ID are mandatory!"); return; }
+            
+            if (!sPass && !editingUserId) { 
+                alert("Password is required for new users!"); 
+                return; 
+            }
+            if (sPass && !isStrongPassword(sPass)) {
+                alert("❌ Password weak hai!\nPassword mein ye sab hona zaroori hai:\n- Kam se kam 8 characters\n- Ek Bada Akshar (A-Z)\n- Ek Chhota Akshar (a-z)\n- Ek Number (0-9)\n- Ek Special Character (@, #, $, !)");
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+
+            if (editingUserId) {
+                users[editingUserId].name = sName;
+                if(sPass) users[editingUserId].pass = sPass;
+                users[editingUserId].role = sRole;
+                users[editingUserId].contact = sContact;
+                users[editingUserId].gender = sGender;
+                users[editingUserId].age = sAge;
+                users[editingUserId].aadhar = sAadhar;
+                alert("User details updated successfully!");
+            } else {
+                if (users[sID]) { alert("Email already registered!"); return; }
+                const randomCode = "SV-AUTH/STAFF-" + Math.floor(10 + Math.random() * 90);
+                users[sID] = { 
+                    name: sName, role: sRole, code: randomCode, pass: sPass, 
+                    isAdmin: false, email: sID, contact: sContact, gender: sGender, age: sAge, aadhar: sAadhar
+                };
+                alert("New user added successfully!");
+            }
+            localStorage.setItem('surekshaUsers', JSON.stringify(users));
+            resetAdminForm();
+            renderActiveUsersTags();
+            updateStaffFilterDropdown();
+        }
+
+        function triggerEditUser(uid) {
+             const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+             const user = users[uid];
+             if(!user) return;
+             document.getElementById('newStaffName').value = user.name || "";
+             document.getElementById('newStaffID').value = uid;
+             document.getElementById('newStaffID').disabled = true;
+             
+             document.getElementById('newStaffPass').value = user.pass || ""; 
+             
+             document.getElementById('newStaffRole').value = user.role || "Service Engineer";
+             document.getElementById('newStaffContact').value = user.contact || "";
+             document.getElementById('newStaffGender').value = user.gender || "Male";
+             document.getElementById('newStaffAge').value = user.age || "";
+             document.getElementById('newStaffAadhar').value = user.aadhar || "";
+             document.getElementById('addUpdateUserBtn').innerText = "Update Details";
+             document.getElementById('cancelEditBtn').style.display = 'inline-block';
+             editingUserId = uid;
+        }
+
+        function deleteUserCore(uid) {
+            if (uid.toLowerCase() === masterAdminEmail.toLowerCase()) return;
+            if (confirm("Are you sure you want to delete this user completely?")) {
+                const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+                delete users[uid];
+                localStorage.setItem('surekshaUsers', JSON.stringify(users));
+                if(editingUserId === uid) resetAdminForm();
+                renderActiveUsersTags();
+                updateStaffFilterDropdown();
+            }
+        }
+
+        function filterHistoryByStaffClick(email) {
+            document.getElementById('filterStaffSelect').value = email;
+            filterHistoryTable();
+            document.getElementById('invoiceHistoryHub').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function renderActiveUsersTags() {
+            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            const container = document.getElementById('activeUsersContainer');
+            container.innerHTML = "";
+            for (let uid in users) {
+                const user = users[uid];
+                container.innerHTML += `
+                <div class="user-tag">
+                    👤 ${user.name} (${user.role}) 
+                    <span class="mod-pass-btn" onclick="triggerEditUser('${uid}')">[Edit Info]</span>
+                    <span class="view-bills-btn" onclick="filterHistoryByStaffClick('${uid}')">[View Bills]</span>
+                    ${uid.toLowerCase() !== masterAdminEmail.toLowerCase() ? `<span class="del-user-btn" onclick="deleteUserCore('${uid}')">✖</span>` : ''}
+                </div>
+            `;
+            }
+        }
+
+        function updateStaffFilterDropdown() {
+            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            const select = document.getElementById('filterStaffSelect');
+            select.innerHTML = '<option value="All">Show All Staff Bills</option>';
+            for(let key in users) {
+                select.innerHTML += `<option value="${users[key].email}">${users[key].name}</option>`;
+            }
+        }
+
+        function resetBillingFormWorkspace() {
+            document.getElementById('custName').value = "";
+            document.getElementById('custAddr').value = "";
+            document.getElementById('custPhone').value = "";
+            document.getElementById('invNumber').value = "";
+            document.getElementById('invPayMode').value = "";
+            
+            const today = new Date();
+            const formattedDate = today.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/ /g, '-');
+            document.getElementById('invDate').value = formattedDate;
+
+            document.querySelectorAll('.item-row').forEach(row => {
+                row.querySelector('.qty').value = "0";
+                row.querySelector('.row-chk').checked = false;
+                row.classList.remove('ready-to-print');
+            });
+            runLiveCalculations();
+        }
+
+        function commitCurrentBillToLog() {
+            const mode = document.getElementById('systemMode').value;
+            const invNo = document.getElementById('invNumber').value.trim() || "QUOT-" + Math.floor(1000 + Math.random() * 9000);
+            const cName = document.getElementById('custName').value.trim() || "Walking Customer";
+            const phoneStr = document.getElementById('custPhone').value.trim();
+            const date = document.getElementById('invDate').value;
+            const total = document.getElementById('grand-total').innerText;
+
+            const items = [];
+            document.querySelectorAll('.item-row').forEach(row => {
+                items.push({
+                    desc: row.querySelector('.p-desc').innerText,
+                    brand: row.querySelector('.p-brand').value,
+                    qty: row.querySelector('.qty').value,
+                    rate: row.querySelector('.rate').value,
+                    checked: row.querySelector('.row-chk').checked
+                });
+            });
+
+            const invoicePayload = {
+                id: invNo, customer: cName, address: document.getElementById('custAddr').value,
+                phone: phoneStr, date: date, payMode: document.getElementById('invPayMode').value,
+                mode: mode, taxStatus: document.getElementById('taxStatus').value, grandTotal: total,
+                billedBy: currentUser.name + " (" + currentUser.email + ")", gridData: items
+            };
+
+            const currentInvoices = JSON.parse(localStorage.getItem('surekshaInvoices'));
+            const matchIdx = currentInvoices.findIndex(item => item.id === invNo);
+            if (matchIdx > -1) { currentInvoices[matchIdx] = invoicePayload; } else { currentInvoices.push(invoicePayload); }
+
+            localStorage.setItem('surekshaInvoices', JSON.stringify(currentInvoices));
+            alert(`Bill [${invNo}] Saved successfully! Naya form tayyar hai.`);
+            
+            resetBillingFormWorkspace();
+
+            if (currentUser.isAdmin) filterHistoryTable();
+        }
+
+        function filterHistoryTable() {
+            const searchTxt = document.getElementById('searchBillInput').value.toLowerCase().trim();
+            const staffEmail = document.getElementById('filterStaffSelect').value.toLowerCase();
+            
+            const logData = JSON.parse(localStorage.getItem('surekshaInvoices'));
+            const container = document.getElementById('historyLogContainer');
+            
+            const mappedData = logData.map((inv, index) => ({ ...inv, orgIdx: index }));
+
+            let filteredData = mappedData.filter(inv => {
+                let matchSearch = true;
+                if (searchTxt) {
+                    const idMatch = inv.id ? inv.id.toLowerCase().includes(searchTxt) : false;
+                    const phoneMatch = inv.phone ? inv.phone.toLowerCase().includes(searchTxt) : false;
+                    matchSearch = idMatch || phoneMatch;
+                }
+                let matchStaff = true;
+                if (staffEmail !== "all") {
+                    matchStaff = inv.billedBy ? inv.billedBy.toLowerCase().includes(staffEmail) : false;
+                }
+                return matchSearch && matchStaff;
+            });
+
+            if (filteredData.length === 0) {
+                container.innerHTML = `<tr><td colspan="8" class="text-center" style="color: gray; font-style: italic;">No records found.</td></tr>`;
+                return;
+            }
+
+            container.innerHTML = "";
+            filteredData.forEach(inv => {
+                container.innerHTML += `
+                <tr>
+                    <td><strong>${inv.id}</strong></td>
+                    <td>${inv.customer}</td>
+                    <td>${inv.phone || 'N/A'}</td>
+                    <td>${inv.date}</td>
+                    <td><span style="text-transform:uppercase; font-size:11px; font-weight:bold; color:#1a365d;">${inv.mode}</span></td>
+                    <td style="color:#27ae60; font-weight:bold;">${inv.grandTotal}</td>
+                    <td><span style="font-size:12px; font-weight:600; color: #2e86c1;">${inv.billedBy}</span></td>
+                    <td>
+                        <button class="action-btn load-btn" onclick="loadSelectedBillIntoWorkspace(${inv.orgIdx})">Load Sudhar</button>
+                        <button class="action-btn remove-btn" onclick="purgeBillFromHistory(${inv.orgIdx})">Delete</button>
+                    </td>
+                </tr>
+            `;
+            });
+        }
+
+        function loadSelectedBillIntoWorkspace(idx) {
+            const logData = JSON.parse(localStorage.getItem('surekshaInvoices'));
+            const target = logData[idx];
+
+            document.getElementById('systemMode').value = target.mode;
+            document.getElementById('taxStatus').value = target.taxStatus;
+            document.getElementById('invNumber').value = target.id;
+            document.getElementById('custName').value = target.customer;
+            document.getElementById('custAddr').value = target.address;
+            document.getElementById('custPhone').value = target.phone || "";
+            document.getElementById('invDate').value = target.date;
+            document.getElementById('invPayMode').value = target.payMode;
+            document.getElementById('billOperatorLabel').innerText = target.billedBy;
+
+            const rows = document.querySelectorAll('.item-row');
+            target.gridData.forEach((item, index) => {
+                if (rows[index]) {
+                    rows[index].querySelector('.p-brand').value = item.brand;
+                    rows[index].querySelector('.qty').value = item.qty;
+                    rows[index].querySelector('.rate').value = item.rate;
+                    rows[index].querySelector('.row-chk').checked = item.checked;
+                    if (item.checked) rows[index].classList.add('ready-to-print');
+                    else rows[index].classList.remove('ready-to-print');
+                }
+            });
+            switchSystemMode();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function purgeBillFromHistory(idx) {
+            if (confirm("Delete this bill?")) {
+                const logData = JSON.parse(localStorage.getItem('surekshaInvoices'));
+                logData.splice(idx, 1);
+                localStorage.setItem('surekshaInvoices', JSON.stringify(logData));
+                filterHistoryTable();
+            }
+        }
+
+        function injectDigitalSignature() {
+            if (!currentUser) return;
+            document.getElementById('digitalSignatureNode').innerHTML = `
+            <div class="digital-signature-badge">
+                🔒 DIGITALLY SIGNED<br>By: ${currentUser.name}<br>ID: ${currentUser.code}<br>Verified Secure
+            </div>
+        `;
+        }
+
+        function switchSystemMode() {
+            const mode = document.getElementById('systemMode').value;
+            const body = document.body;
+            const metaBox = document.getElementById('customerMetaPanel');
+            const checkboxes = document.querySelectorAll('.select-col');
+            const taxGroup = document.getElementById('taxStatusGroup');
+
+            if (mode === 'invoice') {
+                body.className = "mode-invoice";
+                document.getElementById('documentTitle').innerText = "TAX INVOICE / CASH MEMO";
+                metaBox.classList.remove('hidden-mode');
+                taxGroup.classList.remove('hidden-mode');
+                checkboxes.forEach(el => el.classList.add('hidden-mode'));
+            } else {
+                body.className = "mode-quotation";
+                document.getElementById('documentTitle').innerText = "SYSTEM ESTIMATE & QUOTATION";
+                metaBox.classList.add('hidden-mode');
+                taxGroup.classList.add('hidden-mode');
+                checkboxes.forEach(el => el.classList.remove('hidden-mode'));
+            }
+            runLiveCalculations();
+        }
+
+        function toggleRowSelection(checkbox) {
+            const row = checkbox.closest('.item-row');
+            if (checkbox.checked) { row.classList.add('ready-to-print'); } else { row.classList.remove('ready-to-print'); }
+        }
+
+        function runLiveCalculations() {
+            const rows = document.querySelectorAll('.item-row');
+            let subTotal = 0;
+            rows.forEach(row => {
+                const qty = parseFloat(row.querySelector('.qty').value) || 0;
+                const rate = parseFloat(row.querySelector('.rate').value) || 0;
+                const total = qty * rate;
+                row.querySelector('.total-field').innerText = total.toFixed(2);
+                subTotal += total;
+            });
+
+            const mode = document.getElementById('systemMode').value;
+            const taxStatus = document.getElementById('taxStatus').value;
+
+            if (mode === 'invoice') {
+                if (taxStatus === 'yes') {
+                    const cgst = subTotal * 0.09; const sgst = subTotal * 0.09;
+                    const grandTotal = subTotal + cgst + sgst;
+                    document.getElementById('subtotalRow').style.display = 'table-row';
+                    document.getElementById('cgst-row').style.display = 'table-row';
+                    document.getElementById('sgst-row').style.display = 'table-row';
+                    document.getElementById('sub-total').innerText = '₹ ' + subTotal.toFixed(2);
+                    document.getElementById('cgst').innerText = '₹ ' + cgst.toFixed(2);
+                    document.getElementById('sgst').innerText = '₹ ' + sgst.toFixed(2);
+                    document.getElementById('grand-total').innerText = '₹ ' + grandTotal.toFixed(2);
+                    document.getElementById('totalLabel').innerText = "Grand Total (INR):";
+                } else {
+                    document.getElementById('subtotalRow').style.display = 'none';
+                    document.getElementById('cgst-row').style.display = 'none';
+                    document.getElementById('sgst-row').style.display = 'none';
+                    document.getElementById('grand-total').innerText = '₹ ' + subTotal.toFixed(2);
+                    document.getElementById('totalLabel').innerText = "Total Amount (₹):";
+                }
+            } else {
+                document.getElementById('subtotalRow').style.display = 'none';
+                document.getElementById('cgst-row').style.display = 'none';
+                document.getElementById('sgst-row').style.display = 'none';
+                document.getElementById('grand-total').innerText = '₹ ' + subTotal.toFixed(2);
+                document.getElementById('totalLabel').innerText = "Estimated Total (₹):";
+            }
+        }
+
+        function executeFinalPrint() {
+            const mode = document.getElementById('systemMode').value;
+            const rows = document.querySelectorAll('.item-row');
+            let currentIdx = 1;
+            rows.forEach(row => {
+                row.classList.remove('hide-on-print');
+                if (mode === 'quotation') {
+                    if (row.classList.contains('ready-to-print')) { row.querySelector('.sn').innerText = currentIdx++; } else { row.classList.add('hide-on-print'); }
+                } else {
+                    const qty = parseFloat(row.querySelector('.qty').value) || 0;
+                    if (qty > 0) { row.querySelector('.sn').innerText = currentIdx++; } else { row.classList.add('hide-on-print'); }
+                }
+            });
+            window.print();
+            let resetIdx = 1;
+            rows.forEach(row => {
+                row.querySelector('.sn').innerText = resetIdx++;
+                row.classList.remove('hide-on-print');
+            });
+        }
+    </script>
+
+</body>
+</html>
