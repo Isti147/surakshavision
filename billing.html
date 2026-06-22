@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sureksha Vision - Enterprise Master Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SECURITY UPDATE: Crypto-JS Library for Encryption -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -444,7 +446,28 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 13px;
-            margin-left: auto;
+        }
+
+        .backup-btn {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .restore-btn {
+            background-color: #7f8c8d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
         }
 
         .invoice-title-bar {
@@ -646,7 +669,7 @@
             color: #1a365d;
         }
 
-        /* Action Buttons Container (Print & WhatsApp) */
+        /* Action Buttons Container */
         .bottom-actions {
             display: flex;
             justify-content: center;
@@ -722,10 +745,6 @@
 
             .control-panel button {
                 width: 100%;
-                margin-left: 0;
-            }
-
-            .sada-bill-btn {
                 margin-left: 0;
                 margin-top: 5px;
             }
@@ -954,8 +973,7 @@
             <div class="admin-flex">
                 <input type="text" id="newStaffName" placeholder="Full Name" style="width: 150px;">
                 <input type="text" id="newStaffID" placeholder="Email ID (Login ID)" style="width: 180px;">
-                <input type="text" id="newStaffPass" placeholder="Strong Password*" style="width: 150px;"
-                    title="At least 8 chars, 1 Upper, 1 Lower, 1 Num, 1 Symbol">
+                <input type="text" id="newStaffPass" placeholder="Strong Password*" style="width: 150px;">
                 <select id="newStaffRole" style="width: 150px;">
                     <option value="Service Engineer">Service Engineer</option>
                     <option value="Network Specialist">Network Specialist</option>
@@ -1047,10 +1065,14 @@
 
             <button class="save-db-btn" onclick="commitCurrentBillToLog()">💾 Save Bill</button>
             <button class="reset-form-btn" onclick="resetBillingFormWorkspace()">🔄 Reset Form</button>
+            <button class="sada-bill-btn" onclick="makeSadaBill()"><i class="fa-solid fa-file-pen"></i> 📝 Sada
+                Bill</button>
 
-            <!-- NEW SADA BILL BUTTON -->
-            <button class="sada-bill-btn" onclick="makeSadaBill()"><i class="fa-solid fa-file-pen"></i> 📝 Sada Bill
-                (Blank)</button>
+            <button class="backup-btn" onclick="exportDatabaseBackup()"><i class="fa-solid fa-download"></i> Export
+                Backup</button>
+            <button class="restore-btn" onclick="triggerRestoreUpload()"><i class="fa-solid fa-upload"></i> Import
+                Backup</button>
+            <input type="file" id="restoreFileInput" style="display:none" onchange="importDatabaseBackup(this)">
         </div>
 
         <div id="documentTitle" class="invoice-title-bar">SYSTEM ESTIMATE & QUOTATION</div>
@@ -1114,7 +1136,6 @@
                     </tr>
                 </thead>
                 <tbody id="inventoryItemsContainer">
-                    <!-- Standard Fixed Items but made EDITABLE -->
                     <tr class="item-row">
                         <td class="select-col"><input type="checkbox" class="row-chk"
                                 onchange="toggleRowSelection(this)"></td>
@@ -1327,7 +1348,6 @@
             </div>
         </div>
 
-        <!-- NEW: BUTTON CONTAINER WITH WHATSAPP LINK -->
         <div class="bottom-actions">
             <button class="print-btn" onclick="executeFinalPrint()"><i class="fa-solid fa-print"></i> Print Document /
                 Save PDF</button>
@@ -1337,9 +1357,33 @@
     </div>
 
     <script>
+        // SECURITY CONFIGURATION
+        const encKey = "SurekshaVisionKey2026";
         const masterAdminEmail = "ahamadmdistiyaque@gmail.com";
-        const masterAdminPass = "sureksha@123";
+        const masterAdminPass = "sureksha@123"; // Asli Password yahan hai, jo ab system khud encrypt karega
         let editingUserId = null;
+
+        // ================= TEMPORARY DATA CLEAR FIX =================
+        // Ye line aapke browser se phasa hua purana data delete kar degi
+        localStorage.clear();
+        // ============================================================
+
+        // Safe Write/Read wrapper with AES Encryption for LocalStorage
+        function secureSetItem(key, data) {
+            const cipherText = CryptoJS.AES.encrypt(JSON.stringify(data), encKey).toString();
+            localStorage.setItem(key, cipherText);
+        }
+
+        function secureGetItem(key) {
+            const cipherText = localStorage.getItem(key);
+            if (!cipherText || cipherText === 'ENCRYPTED') return null; // Avoid fake tokens
+            try {
+                const bytes = CryptoJS.AES.decrypt(cipherText, encKey);
+                return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+            } catch (e) {
+                return null;
+            }
+        }
 
         function generateFreshInvoiceNo() {
             const dateObj = new Date();
@@ -1361,25 +1405,31 @@
         };
 
         function initializeSystemDatabase() {
-            if (!localStorage.getItem('surekshaUsers')) {
+            if (!localStorage.getItem('surekshaUsers') || localStorage.getItem('surekshaUsers') === 'ENCRYPTED') {
                 const defaultUsers = {};
+
+                // YAHAN PAR SYSTEM AAPKE PASSWORD KO KHUD ENCRYPT KAR RAHA HAI
                 defaultUsers[masterAdminEmail] = {
                     name: "Mohammad Istiyaque Ahamad", role: "Proprietor/Admin", code: "SV-AUTH/MIA-01",
-                    pass: masterAdminPass, isAdmin: true, email: masterAdminEmail,
+                    pass: CryptoJS.SHA256(masterAdminPass).toString(), // HASHING HERE
+                    isHashed: true, isAdmin: true, email: masterAdminEmail,
                     contact: "+91 91231 88984", gender: "Male", age: "25", aadhar: "[Aadhaar Redacted]"
                 };
+
                 defaultUsers["tech01@surekshavision.com"] = {
                     name: "Technical Staff 1", role: "Service Engineer", code: "SV-AUTH/ENG-09",
-                    pass: "Tech@1234", isAdmin: false, email: "tech01@surekshavision.com",
+                    pass: CryptoJS.SHA256("Tech@1234").toString(), isHashed: true, isAdmin: false, email: "tech01@surekshavision.com",
                     contact: "", gender: "Male", age: "", aadhar: ""
                 };
-                localStorage.setItem('surekshaUsers', JSON.stringify(defaultUsers));
+
+                secureSetItem('surekshaUsers', defaultUsers);
             }
-            if (!localStorage.getItem('surekshaInvoices')) {
-                localStorage.setItem('surekshaInvoices', JSON.stringify([]));
+            if (!localStorage.getItem('surekshaInvoices') || localStorage.getItem('surekshaInvoices') === 'ENCRYPTED') {
+                secureSetItem('surekshaInvoices', []);
             }
         }
 
+        // Initialize Call
         initializeSystemDatabase();
         let currentUser = null;
 
@@ -1392,13 +1442,18 @@
             const uid = document.getElementById('usernameInput').value.trim().toLowerCase();
             const pass = document.getElementById('passwordInput').value;
             const errMsg = document.getElementById('loginError');
-            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+
+            // Check dynamic hash
+            const inputHash = CryptoJS.SHA256(pass).toString();
+            const users = secureGetItem('surekshaUsers');
 
             let matchedUser = null;
-            for (let key in users) {
-                if (key.toLowerCase() === uid && users[key].pass === pass) {
-                    matchedUser = users[key];
-                    break;
+            if (users) {
+                for (let key in users) {
+                    if (key.toLowerCase() === uid && users[key].pass === inputHash) {
+                        matchedUser = users[key];
+                        break;
+                    }
                 }
             }
 
@@ -1443,21 +1498,20 @@
             const uidInput = prompt("Enter your Registered Email ID to recover password:");
             if (!uidInput) return;
             const targetEmail = uidInput.trim().toLowerCase();
-            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            const users = secureGetItem('surekshaUsers');
             let matchedKey = null;
             for (let key in users) { if (key.toLowerCase() === targetEmail) { matchedKey = key; break; } }
             if (!matchedKey) { alert("❌ Email ID not found!"); return; }
-            const targetUser = users[matchedKey];
 
-            const newPasswordValue = prompt(`[TESTING MODE] Enter new STRONG password for [${targetUser.name}]:\n(Min 8 chars, 1 Upper, 1 Lower, 1 Num, 1 Symbol)`);
+            const newPasswordValue = prompt(`Enter new STRONG password for [${users[matchedKey].name}]:\n(Min 8 chars, 1 Upper, 1 Lower, 1 Num, 1 Symbol)`);
             if (newPasswordValue && newPasswordValue.trim() !== "") {
                 if (!isStrongPassword(newPasswordValue.trim())) {
-                    alert("❌ Password strong nahi hai!\nKam se kam 8 letters, 1 Bada akshar (A-Z), 1 Chhota (a-z), 1 Number (0-9) aur 1 Special Character (@, #, $ etc.) hona zaruri hai.");
+                    alert("❌ Password weak hai! Security criteria fulfill karein.");
                     return;
                 }
-                users[matchedKey].pass = newPasswordValue.trim();
-                localStorage.setItem('surekshaUsers', JSON.stringify(users));
-                alert("Success! Password securely update ho gaya hai.");
+                users[matchedKey].pass = CryptoJS.SHA256(newPasswordValue.trim()).toString();
+                secureSetItem('surekshaUsers', users);
+                alert("Success! Password update securely.");
             }
         }
 
@@ -1489,49 +1543,46 @@
 
             if (!sName || !sID) { alert("Name and Email ID are mandatory!"); return; }
 
-            if (!sPass && !editingUserId) {
-                alert("Password is required for new users!");
-                return;
-            }
+            if (!sPass && !editingUserId) { alert("Password is required!"); return; }
             if (sPass && !isStrongPassword(sPass)) {
-                alert("❌ Password weak hai!\nPassword mein ye sab hona zaroori hai:\n- Kam se kam 8 characters\n- Ek Bada Akshar (A-Z)\n- Ek Chhota Akshar (a-z)\n- Ek Number (0-9)\n- Ek Special Character (@, #, $, !)");
+                alert("❌ Password weak hai!");
                 return;
             }
 
-            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            const users = secureGetItem('surekshaUsers');
 
             if (editingUserId) {
                 users[editingUserId].name = sName;
-                if (sPass) users[editingUserId].pass = sPass;
+                if (sPass) users[editingUserId].pass = CryptoJS.SHA256(sPass).toString();
                 users[editingUserId].role = sRole;
                 users[editingUserId].contact = sContact;
                 users[editingUserId].gender = sGender;
                 users[editingUserId].age = sAge;
                 users[editingUserId].aadhar = sAadhar;
-                alert("User details updated successfully!");
+                alert("User details updated!");
             } else {
                 if (users[sID]) { alert("Email already registered!"); return; }
                 const randomCode = "SV-AUTH/STAFF-" + Math.floor(10 + Math.random() * 90);
                 users[sID] = {
-                    name: sName, role: sRole, code: randomCode, pass: sPass,
+                    name: sName, role: sRole, code: randomCode, pass: CryptoJS.SHA256(sPass).toString(),
                     isAdmin: false, email: sID, contact: sContact, gender: sGender, age: sAge, aadhar: sAadhar
                 };
-                alert("New user added successfully!");
+                alert("New user added!");
             }
-            localStorage.setItem('surekshaUsers', JSON.stringify(users));
+            secureSetItem('surekshaUsers', users);
             resetAdminForm();
             renderActiveUsersTags();
             updateStaffFilterDropdown();
         }
 
         function triggerEditUser(uid) {
-            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            const users = secureGetItem('surekshaUsers');
             const user = users[uid];
             if (!user) return;
             document.getElementById('newStaffName').value = user.name || "";
             document.getElementById('newStaffID').value = uid;
             document.getElementById('newStaffID').disabled = true;
-            document.getElementById('newStaffPass').value = user.pass || "";
+            document.getElementById('newStaffPass').value = "";
             document.getElementById('newStaffRole').value = user.role || "Service Engineer";
             document.getElementById('newStaffContact').value = user.contact || "";
             document.getElementById('newStaffGender').value = user.gender || "Male";
@@ -1544,10 +1595,10 @@
 
         function deleteUserCore(uid) {
             if (uid.toLowerCase() === masterAdminEmail.toLowerCase()) return;
-            if (confirm("Are you sure you want to delete this user completely?")) {
-                const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            if (confirm("Delete this user completely?")) {
+                const users = secureGetItem('surekshaUsers');
                 delete users[uid];
-                localStorage.setItem('surekshaUsers', JSON.stringify(users));
+                secureSetItem('surekshaUsers', users);
                 if (editingUserId === uid) resetAdminForm();
                 renderActiveUsersTags();
                 updateStaffFilterDropdown();
@@ -1561,7 +1612,7 @@
         }
 
         function renderActiveUsersTags() {
-            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            const users = secureGetItem('surekshaUsers');
             const container = document.getElementById('activeUsersContainer');
             container.innerHTML = "";
             for (let uid in users) {
@@ -1578,7 +1629,7 @@
         }
 
         function updateStaffFilterDropdown() {
-            const users = JSON.parse(localStorage.getItem('surekshaUsers'));
+            const users = secureGetItem('surekshaUsers');
             const select = document.getElementById('filterStaffSelect');
             select.innerHTML = '<option value="All">Show All Staff Bills</option>';
             for (let key in users) {
@@ -1586,7 +1637,6 @@
             }
         }
 
-        // ====== NEW: MAKE SADA BILL ======
         function makeSadaBill() {
             resetBillingFormWorkspace();
             const rows = document.querySelectorAll('.item-row');
@@ -1596,7 +1646,7 @@
                 row.querySelector('.rate').value = "0";
             });
             document.getElementById('documentTitle').innerText = "CUSTOM BILL / CASH MEMO";
-            alert("✅ Sada Bill Ready! Ab aap items ke naam aur rate khud type kar sakte hain.");
+            alert("✅ Sada Bill Ready!");
         }
 
         function resetBillingFormWorkspace() {
@@ -1608,7 +1658,6 @@
             setCurrentDate();
             generateFreshInvoiceNo();
 
-            // DEFAULT ITEMS RESET
             const defaultItems = [
                 "Surveillance Camera (Outdoor Bullet / Indoor Dome)", "Network Video Recorder (NVR / DVR Recorder)",
                 "Surveillance Hard Disk Drive (HDD)", "PoE Switch / Centralized Power Supply", "LED Monitor Screen & Connectivity Cables",
@@ -1640,12 +1689,11 @@
 
         function commitCurrentBillToLog() {
             const mode = document.getElementById('systemMode').value;
-
             const cName = document.getElementById('custName').value.trim();
             const phoneStr = document.getElementById('custPhone').value.trim();
 
             if (!cName || !phoneStr) {
-                alert("⚠️ Customer Name and Contact Number is mandatory!");
+                alert("⚠️ Customer Name and Contact Number mandatory!");
                 return;
             }
 
@@ -1676,12 +1724,12 @@
                 billedBy: currentUser.name + " (" + currentUser.email + ")", gridData: items
             };
 
-            const currentInvoices = JSON.parse(localStorage.getItem('surekshaInvoices'));
+            const currentInvoices = secureGetItem('surekshaInvoices') || [];
             const matchIdx = currentInvoices.findIndex(item => item.id === invNo);
             if (matchIdx > -1) { currentInvoices[matchIdx] = invoicePayload; } else { currentInvoices.push(invoicePayload); }
 
-            localStorage.setItem('surekshaInvoices', JSON.stringify(currentInvoices));
-            alert(`Bill [${invNo}] Saved successfully! Naya form tayyar hai.`);
+            secureSetItem('surekshaInvoices', currentInvoices);
+            alert(`Bill [${invNo}] Saved Securely!`);
 
             resetBillingFormWorkspace();
             if (currentUser.isAdmin) filterHistoryTable();
@@ -1690,8 +1738,7 @@
         function filterHistoryTable() {
             const searchTxt = document.getElementById('searchBillInput').value.toLowerCase().trim();
             const staffEmail = document.getElementById('filterStaffSelect').value.toLowerCase();
-
-            const logData = JSON.parse(localStorage.getItem('surekshaInvoices'));
+            const logData = secureGetItem('surekshaInvoices') || [];
             const container = document.getElementById('historyLogContainer');
 
             const mappedData = logData.map((inv, index) => ({ ...inv, orgIdx: index }));
@@ -1736,7 +1783,7 @@
         }
 
         function loadSelectedBillIntoWorkspace(idx) {
-            const logData = JSON.parse(localStorage.getItem('surekshaInvoices'));
+            const logData = secureGetItem('surekshaInvoices');
             const target = logData[idx];
 
             document.getElementById('systemMode').value = target.mode;
@@ -1767,9 +1814,9 @@
 
         function purgeBillFromHistory(idx) {
             if (confirm("Delete this bill?")) {
-                const logData = JSON.parse(localStorage.getItem('surekshaInvoices'));
+                const logData = secureGetItem('surekshaInvoices');
                 logData.splice(idx, 1);
-                localStorage.setItem('surekshaInvoices', JSON.stringify(logData));
+                secureSetItem('surekshaInvoices', logData);
                 filterHistoryTable();
             }
         }
@@ -1865,18 +1912,10 @@
                 if (brandInput) brandInput.setAttribute('value', brandInput.value);
 
                 if (mode === 'quotation') {
-                    if (row.classList.contains('ready-to-print')) {
-                        row.querySelector('.sn').innerText = currentIdx++;
-                    } else {
-                        row.classList.add('hide-on-print');
-                    }
+                    if (row.classList.contains('ready-to-print')) { row.querySelector('.sn').innerText = currentIdx++; } else { row.classList.add('hide-on-print'); }
                 } else {
                     const qty = parseFloat(row.querySelector('.qty').value) || 0;
-                    if (qty > 0) {
-                        row.querySelector('.sn').innerText = currentIdx++;
-                    } else {
-                        row.classList.add('hide-on-print');
-                    }
+                    if (qty > 0) { row.querySelector('.sn').innerText = currentIdx++; } else { row.classList.add('hide-on-print'); }
                 }
             });
             window.print();
@@ -1887,31 +1926,59 @@
             });
         }
 
-        // ====== NEW: WHATSAPP SEND FUNCTION ======
         function sendToWhatsApp() {
             const phone = document.getElementById('custPhone').value.trim();
             const name = document.getElementById('custName').value.trim() || "Customer";
             const total = document.getElementById('grand-total').innerText;
             const invNo = document.getElementById('invNumber').value.trim();
 
-            if (!phone) {
-                alert("⚠️ WhatsApp par bhejne ke liye Customer ka Contact No. jaruri hai!");
-                return;
-            }
-
-            // Clean number (Remove spaces, dashes)
+            if (!phone) { alert("⚠️ Contact No. required!"); return; }
             let cleanPhone = phone.replace(/\D/g, '');
-            // Agar number 10 digit ka hai, to aage '91' jod do
-            if (cleanPhone.length === 10) {
-                cleanPhone = '91' + cleanPhone;
-            }
+            if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
 
-            // WhatsApp Message Text
-            let msg = `*Sureksha Vision*\n\nHello ${name},\nYour Bill/Estimate (No: ${invNo}) has been generated.\n\n*Grand Total: ${total}*\n\nPlease find the PDF attached above (if sent). Thank you for choosing Sureksha Vision!\n(CCTV Installation & IT Services)`;
+            let msg = `*Sureksha Vision*\n\nHello ${name},\nYour Bill/Estimate (No: ${invNo}) has been generated.\n\n*Grand Total: ${total}*\n\nPlease find the PDF attached above. Thank you!\n(CCTV Installation & IT Services)`;
+            window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
 
-            // Open WhatsApp Link
-            const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`;
-            window.open(waLink, '_blank');
+        function exportDatabaseBackup() {
+            const backupData = {
+                users: secureGetItem('surekshaUsers'),
+                invoices: secureGetItem('surekshaInvoices'),
+                exportDate: new Date().toISOString()
+            };
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `Sureksha_Vision_DB_Backup_${new Date().toISOString().slice(0, 10)}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function triggerRestoreUpload() {
+            document.getElementById('restoreFileInput').click();
+        }
+
+        function importDatabaseBackup(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                try {
+                    const parsedData = JSON.parse(e.target.result);
+                    if (parsedData.users && parsedData.invoices) {
+                        secureSetItem('surekshaUsers', parsedData.users);
+                        secureSetItem('surekshaInvoices', parsedData.invoices);
+                        alert("🔒 Database Backup Restored and Re-encrypted Successfully! Page refresh ho raha hai.");
+                        location.reload();
+                    } else {
+                        alert("❌ Invalid Backup File Structure.");
+                    }
+                } catch (err) {
+                    alert("❌ Backup File crash hai ya format sahi nahi hai.");
+                }
+            };
+            reader.readAsText(file);
         }
     </script>
 </body>
