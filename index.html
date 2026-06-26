@@ -233,6 +233,265 @@
             box-shadow: 0 8px 25px rgba(34, 197, 94, 0.6);
             color: white;
         }
+    </style>
+</head>
+
+<body>
+
+    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow-lg">
+                <div class="modal-header border-0 bg-light rounded-top-4 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center px-4 pb-4">
+                    <div class="mb-3">
+                        <i class="fa-solid fa-handshake-angle" style="font-size: 3rem; color: var(--accent-blue);"></i>
+                    </div>
+                    <h4 id="welcome-modal-title" class="fw-bold text-dark mb-3">🙏 Sureksha Vision में आपका हार्दिक
+                        स्वागत है!</h4>
+                    <p id="welcome-modal-desc" class="text-muted small" style="line-height: 1.8;">
+                        हम समझते हैं कि आपके घर और व्यापार की सुरक्षा आपके लिए कितनी महत्वपूर्ण है। दानापुर और पटना
+                        क्षेत्र में सबसे भरोसेमंद CCTV और IT सपोर्ट टीम के रूप में, हम आपको बेहतरीन सर्विस और बिना किसी
+                        छुपे खर्च के एकदम सही दाम देने का वादा करते हैं।
+                    </p>
+                    <button class="btn btn-warning rounded-pill px-4 fw-bold mt-2 shadow-sm" data-bs-dismiss="modal"
+                        id="welcome-modal-btn">Aage Badhein (Explore)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="live-toast" class="live-toast-alert">
+        <span class="pulse-dot"></span>
+        <span id="toast-message-text">Live: Processing query from Danapur Cantt...</span>
+    </div>
+
+    <div class="top-nav text-white py-2">
+        <div
+            class="container d-flex flex-column flex-sm-row justify-content-between align-items-center text-center text-sm-start gap-2">
+            <div class="d-flex flex-column flex-sm-row gap-1 gap-sm-4 align-items-center">
+                <div class="small">
+                    <i class="fa-solid fa-envelope text-info me-1"></i>
+                    <a href="mailto:ahamadmdistiyaque@gmail.com" class="text-light">ahamadmdistiyaque@gmail.com</a>
+                </div>
+                <!-- Yahan Location ka link add kiya gaya hai -->
+                <div class="small">
+                    <i class="fa-solid fa-location-dot text-danger me-1"></i>
+                    <a href="https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer" class="text-light text-decoration-none">
+                        Suraksha Vision, Patna
+                    </a>
+                </div>
+                <div id="text-emergency" class="small">
+                    <i class="fa-solid fa-clock text-warning me-1"></i>24/7 Doorstep Emergency Service
+                </div>
+                <div>
+                    <a href="https://www.linkedin.com/in/md-istiyaque-ahamad-117162255" target="_blank"
+                        rel="noopener noreferrer" class="text-light text-decoration-none small">
+                        <i class="fa-brands fa-linkedin text-info me-1"></i>LinkedIn Connect
+                    </a>
+                </div>
+            </div>
+            <div class="lang-selector-container d-flex align-items-center gap-2 mt-1 mt-sm-0">
+                <i class="fa-solid fa-language text-info"></i>
+                <select id="language-switcher" onchange="changeLanguage(this.value)">
+                    <option value="hi" selected>हिन्दी (Hindi)</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="daily-greeting-bar" id="dailyGreetingText"></div>
+
+    <nav class="navbar navbar-dark main-navbar py-2 sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-bold fs-4 text-white" href="#">
+                <i class="fa-solid fa-shield-halved text-warning me-1"></i>SUREKSHA <span
+                    style="color: #fff;">VISION</span>
+            </a>
+            <div class="d-flex align-items-center gap-2">
+                <span
+                    class="badge bg-dark border border-secondary text-light d-none d-lg-inline-flex align-items-center gap-2 small">
+                    <span class="pulse-dot"></span>System Active
+                </span>
+                <a href="billing.html" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-light btn-sm fw-bold rounded-pill px-3" style="color: var(--primary-dark);">
+                    <i class="fa-solid fa-laptop-code me-1"></i> Billing Panel
+                </a>
+                <a id="navCallBtn" href="tel:+919123188984" class="btn btn-warning btn-sm fw-bold rounded-pill px-3">
+                    <i class="fa-solid fa-phone me-1"></i>Call
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-premium d-flex align-items-center reveal-element" id="dynamicHeroSection">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-9 hero-card">
+                    <span id="text-hero-badge"
+                        class="badge bg-danger px-3 py-2 rounded-pill mb-2 text-uppercase small">Top Rated Security
+                        Expert</span>
+                    <h1 id="text-hero-title" class="fs-2 fw-bold mb-2 text-white">Aapka Ghar, Hamari <span
+                            id="text-hero-span" style="color: var(--glow-yellow);">Sureksha</span></h1>
+                    <p id="text-hero-subtitle" class="fs-6 text-light mb-3">Danapur Cantt, Usri aur Jamsaut Ka Sabse
+                        Advanced CCTV & Intercom Installer</p>
+                    <p id="text-hero-desc" class="text-slate-300 mb-4 small opacity-75">Hum Apartments, Offices, aur
+                        Shops ke liye High-Definition IP Cameras, Biometrics System aur EPABX Intercom ki complete
+                        installation aur repair service dete hain.</p>
+
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <a id="heroCallBtn" href="tel:+919123188984"
+                            class="btn btn-premium-call btn-md rounded-pill px-4 py-2">
+                            <i class="fa-solid fa-phone-flip me-2"></i> Turat Call Karein
+                        </a>
+                        <a id="heroWaBtn"
+                            href="https://wa.me/919123188984?text=Hello%20Sureksha%20Vision,%20I%20want%20to%20enquire%20about%20CCTV/Intercom%20installation."
+                            target="_blank" rel="noopener noreferrer"
+                            class="btn btn-premium-wa btn-md rounded-pill px-4 py-2">
+                            <i class="fa-brands fa-whatsapp me-2"></i> WhatsApp
+                        </a>
+                        <!-- Yahan Map ka Button add kiya gaya hai -->
+                        <a id="heroMapBtn" href="https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer" class="btn btn-light btn-md rounded-pill px-4 py-2 text-dark fw-bold shadow-sm mt-2 mt-sm-0">
+                            <i class="fa-solid fa-map-location-dot text-danger me-2"></i> Our Location
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS zaroori hai Modal chalane ke liye -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+
+        .live-toast-alert {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #ffffff;
+            color: #1e293b;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            border-left: 4px solid var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transform: translateX(-150%);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .live-toast-alert.show-popup {
+            transform: translateX(0);
+        }
+
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: buildUp 0.8s ease forwards;
+        }
+
+        @keyframes buildUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-premium {
+            position: relative;
+            background-size: cover !important;
+            background-position: center !important;
+            color: white;
+            padding: 60px 0;
+            transition: background-image 1.5s ease-in-out;
+            z-index: 1;
+        }
+
+        .hero-premium::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-dark), var(--accent-blue));
+            opacity: 0.65;
+            z-index: -1;
+            transition: background 1.5s ease-in-out;
+        }
+
+        .hero-premium h1,
+        .hero-premium p,
+        .hero-premium span.badge {
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        @media (min-width: 768px) {
+            .hero-premium {
+                padding: 120px 0;
+            }
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        @media (min-width: 576px) {
+            .hero-card {
+                padding: 40px;
+            }
+        }
+
+        .btn-premium-call {
+            background: linear-gradient(45deg, var(--accent-blue), var(--primary-dark));
+            color: white;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-premium-call:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            color: white;
+        }
+
+        .btn-premium-wa {
+            background: linear-gradient(45deg, #22c55e, #15803d);
+            color: white;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-premium-wa:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.6);
+            color: white;
+        }
 
         .card-service-premium {
             border: none;
