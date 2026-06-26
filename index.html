@@ -514,11 +514,9 @@
                     <i class="fa-solid fa-envelope text-info me-1"></i>
                     <a href="mailto:ahamadmdistiyaque@gmail.com" class="text-light">ahamadmdistiyaque@gmail.com</a>
                 </div>
-                <!-- 1. MAP LINK ADDED IN NAVBAR (CORRECTED SPELLING) -->
                 <div class="small">
                     <i class="fa-solid fa-location-dot text-danger me-1"></i>
-                    <a href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer"
-                        class="text-light text-decoration-none">
+                    <a href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer" class="text-light text-decoration-none">
                         Sureksha Vision, Patna
                     </a>
                 </div>
@@ -592,10 +590,7 @@
                             class="btn btn-premium-wa btn-md rounded-pill px-4 py-2">
                             <i class="fa-brands fa-whatsapp me-2"></i> WhatsApp Message
                         </a>
-                        <!-- 2. MAP LINK ADDED IN HERO SECTION -->
-                        <a id="heroMapBtn" href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank"
-                            rel="noopener noreferrer"
-                            class="btn btn-light btn-md rounded-pill px-4 py-2 text-dark fw-bold shadow-sm mt-2 mt-sm-0">
+                        <a id="heroMapBtn" href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer" class="btn btn-light btn-md rounded-pill px-4 py-2 text-dark fw-bold shadow-sm mt-2 mt-sm-0">
                             <i class="fa-solid fa-map-location-dot text-danger me-2"></i> Our Location
                         </a>
                     </div>
@@ -695,7 +690,6 @@
                 <h3 id="text-serv-title" class="fw-bold fs-4" style="color: var(--primary-dark);">Professional Security
                     & IT Solutions</h3>
             </div>
-            <!-- Grid updated to 3 per row (col-lg-4) to perfectly fit 6 items -->
             <div class="row g-3">
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card card-service-premium p-3 text-center h-100">
@@ -729,22 +723,18 @@
                             malware/virus removal, aur performance boost ke liye hardware upgrade (RAM/SSD).</p>
                     </div>
                 </div>
-                <!-- NEW SERVICE: Electric & Electronic -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card card-service-premium p-3 text-center h-100">
                         <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
                         <h5 id="text-serv5-title" class="fw-bold mb-2">Electrical & Electronic Work</h5>
-                        <p id="text-serv5-desc" class="text-muted small mb-0">Ghar aur office ke sabhi electric wiring,
-                            appliances repair aur electronic gadgets ka fix.</p>
+                        <p id="text-serv5-desc" class="text-muted small mb-0">Ghar aur office ke sabhi electric wiring, appliances repair aur electronic gadgets ka fix.</p>
                     </div>
                 </div>
-                <!-- NEW SERVICE: Website Design -->
                 <div class="col-12 col-md-6 col-lg-4">
                     <div class="card card-service-premium p-3 text-center h-100">
                         <div class="icon-box"><i class="fa-solid fa-laptop-code"></i></div>
                         <h5 id="text-serv6-title" class="fw-bold mb-2">Custom Website Design</h5>
-                        <p id="text-serv6-desc" class="text-muted small mb-0">Customer ki jarurat aur business ke hisaab
-                            se modern, fast aur responsive website development.</p>
+                        <p id="text-serv6-desc" class="text-muted small mb-0">Customer ki jarurat aur business ke hisaab se modern, fast aur responsive website development.</p>
                     </div>
                 </div>
             </div>
@@ -908,7 +898,6 @@
                                 <option>Biometric / Access Control</option>
                                 <option>Networking / WiFi Setup</option>
                                 <option>Computer Hardware & Software Repair</option>
-                                <!-- Nayi services form mein add ki gayi hain -->
                                 <option>Electrical & Electronic Work</option>
                                 <option>Custom Website Design</option>
                             </select>
@@ -1075,10 +1064,8 @@
                         <h6 id="text-loc-title" class="fw-bold text-warning mb-2"><i
                                 class="fa-solid fa-map-location-dot me-2"></i>Our Location</h6>
                         <p class="mb-1 small"><i class="fa-solid fa-location-dot text-danger me-1"></i> <strong
-                                id="text-loc-addr">Address:</strong> <a href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA"
-                                target="_blank" rel="noopener noreferrer" class="text-decoration-none text-light">Usri,
-                                Jamsaut Road, Near Danapur Cantt, Patna,
-                                Bihar - 801503</a></p>
+                                id="text-loc-addr">Address:</strong> <a href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-light">Usri, Jamsaut Road, Near Danapur Cantt, Patna,
+                            Bihar - 801503</a></p>
                         <p class="mb-2 small text-muted"><i class="fa-solid fa-gopuram text-warning me-1"></i> <strong
                                 id="text-loc-land">Landmark:</strong> Near Kabristan, Bandh Road</p>
                         <div class="text-center text-md-start">
@@ -1166,79 +1153,53 @@
 
         applyRandomTheme();
 
-        // ================= UNIVERSAL FESTIVAL THEME ENGINE =================
+        // ================= ADVANCED FESTIVAL THEME ENGINE (CALENDAR MAPPED) =================
         function applyFestiveTheme() {
             const today = new Date();
-            const date = today.getDate();
-            const month = today.getMonth() + 1;
+            const m = today.getMonth() + 1; // Month 1-12
+            const d = today.getDate();
+            // Create MM-DD format for matching
+            const currentMD = (m < 10 ? '0'+m : m) + '-' + (d < 10 ? '0'+d : d);
 
             let bannerText = "";
             let bgGradient = "";
             let textColor = "#fff";
 
-            if ((month === 1 && date >= 24 && date <= 27) || (month === 8 && date >= 13 && date <= 16)) {
-                document.documentElement.style.setProperty('--accent-blue', '#ff9933');
-                document.documentElement.style.setProperty('--primary-dark', '#138808');
-                bgGradient = "linear-gradient(90deg, #ff9933, #ffffff, #138808)";
-                textColor = "#000";
-                bannerText = "🇮🇳 Happy Republic Day / Independence Day! Jai Hind! Get Special Discounts on CCTV. 🇮🇳";
-            }
-            else if (month === 1 && date >= 13 && date <= 15) {
-                document.documentElement.style.setProperty('--primary-dark', '#78350f');
-                document.documentElement.style.setProperty('--accent-blue', '#f59e0b');
-                bgGradient = "linear-gradient(90deg, #b45309, #fbbf24)";
-                bannerText = "🌾 Makar Sankranti ki Hardik Shubhkamnayein! Nayi fasal aur nayi ummid. 🌾";
-            }
-            else if (month === 3 && date >= 1 && date <= 5) {
-                document.documentElement.style.setProperty('--primary-dark', '#4c1d95');
-                document.documentElement.style.setProperty('--accent-blue', '#db2777');
-                bgGradient = "linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6)";
-                bannerText = "🎨 Happy Holi! Rango ke is tyohar mein sabhi ke jeevan mein khushiyan aayein. 🎨";
-            }
-            else if (month === 3 && date >= 19 && date <= 22) {
-                document.documentElement.style.setProperty('--primary-dark', '#064e3b');
-                document.documentElement.style.setProperty('--accent-blue', '#10b981');
-                bgGradient = "linear-gradient(90deg, #064e3b, #047857)";
-                bannerText = "🌙 Eid Mubarak! Aman, shanti aur bhaichare ka tyohar. 🌙";
-            }
-            else if (month === 5 && date >= 1 && date <= 3) {
-                document.documentElement.style.setProperty('--primary-dark', '#0f766e');
-                document.documentElement.style.setProperty('--accent-blue', '#14b8a6');
-                bgGradient = "linear-gradient(90deg, #0f766e, #5eead4)";
-                bannerText = "🪷 Buddha Purnima ki shubhkamnayein. Shanti aur ahimsa ka sandesh. 🪷";
-            }
-            else if (month === 10 && date >= 17 && date <= 20) {
-                document.documentElement.style.setProperty('--primary-dark', '#7f1d1d');
-                document.documentElement.style.setProperty('--accent-blue', '#dc2626');
-                bgGradient = "linear-gradient(90deg, #991b1b, #ef4444)";
-                bannerText = "🏹 Vijayadashami ki shubhkamnayein! Burayi par acchayi ki jeet. 🏹";
-            }
-            else if (month === 11 && date >= 6 && date <= 10) {
-                document.documentElement.style.setProperty('--primary-dark', '#450a0a');
-                document.documentElement.style.setProperty('--accent-blue', '#ea580c');
-                bgGradient = "linear-gradient(90deg, #7f1d1d, #ea580c, #f59e0b)";
-                bannerText = "🪔 Shubh Diwali! Roshni ka yeh tyohar aapke jeevan mein sukh-samriddhi laye. 🪔";
-            }
-            else if (month === 11 && date >= 12 && date <= 15) {
-                document.documentElement.style.setProperty('--primary-dark', '#9a3412');
-                document.documentElement.style.setProperty('--accent-blue', '#f97316');
-                bgGradient = "linear-gradient(90deg, #c2410c, #fdba74)";
-                textColor = "#000";
-                bannerText = "🌅 Chhath Mahaparv ki dher saari shubhkamnayein! Chhathi Maiya sabka kalyan karein. 🌅";
-            }
-            else if (month === 11 && date >= 24 && date <= 25) {
-                document.documentElement.style.setProperty('--primary-dark', '#1e3a8a');
-                document.documentElement.style.setProperty('--accent-blue', '#eab308');
-                bgGradient = "linear-gradient(90deg, #1e3a8a, #ca8a04)";
-                bannerText = "✨ Guru Nanak Jayanti ki lakh-lakh vadhaiyan! Sabka bhala ho. ✨";
-            }
-            else if ((month === 12 && date >= 24) || (month === 1 && date <= 2)) {
-                document.documentElement.style.setProperty('--primary-dark', '#022c22');
-                document.documentElement.style.setProperty('--accent-blue', '#dc2626');
-                bgGradient = "linear-gradient(90deg, #991b1b, #166534)";
-                bannerText = "🎄 Merry Christmas & Happy New Year! Khushiyon aur pyaar ka tyohar. ❄️";
+            // Complete Festival Calendar Mapping for current cycles (Includes Fixed & Lunar approximations)
+            const festivals = {
+                "01-01": { bg: "linear-gradient(90deg, #1e3a8a, #9333ea)", text: "🎉 Happy New Year! Naye saal ki hardik shubhkamnayein! 🎉" },
+                "01-14": { bg: "linear-gradient(90deg, #b45309, #fbbf24)", text: "🌾 Makar Sankranti ki Hardik Shubhkamnayein! 🌾" },
+                "01-26": { bg: "linear-gradient(90deg, #ff9933, #ffffff, #138808)", color:"#000", text: "🇮🇳 Happy Republic Day! Jai Hind! 🇮🇳" },
+                "03-03": { bg: "linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6)", text: "🎨 Happy Holi! Rango ke is tyohar mein sabhi ke jeevan mein khushiyan aayein. 🎨" },
+                "03-20": { bg: "linear-gradient(90deg, #064e3b, #047857)", text: "🌙 Eid-ul-Fitr Mubarak! Aman aur bhaichare ka tyohar. 🌙", pTheme: '#064e3b', aTheme: '#10b981' },
+                "05-27": { bg: "linear-gradient(90deg, #064e3b, #047857)", text: "🌙 Eid al-Adha Mubarak! 🌙", pTheme: '#064e3b', aTheme: '#10b981' },
+                
+                // Muharram Tracking (Around June 25, 26, 27)
+                "06-25": { bg: "linear-gradient(90deg, #111827, #064e3b, #111827)", text: "🖤 Youm-e-Ashura (Muharram). Haq aur insaaf ke liye di gayi kurbani ko salaam. 🖤", pTheme: '#000000', aTheme: '#10b981' },
+                "06-26": { bg: "linear-gradient(90deg, #111827, #064e3b, #111827)", text: "🖤 Youm-e-Ashura (Muharram). Haq aur insaaf ke liye di gayi kurbani ko salaam. 🖤", pTheme: '#000000', aTheme: '#10b981' },
+                "06-27": { bg: "linear-gradient(90deg, #111827, #064e3b, #111827)", text: "🖤 Youm-e-Ashura (Muharram). Haq aur insaaf ke liye di gayi kurbani ko salaam. 🖤", pTheme: '#000000', aTheme: '#10b981' },
+                
+                "08-15": { bg: "linear-gradient(90deg, #ff9933, #ffffff, #138808)", color:"#000", text: "🇮🇳 Happy Independence Day! Jai Hind! 🇮🇳" },
+                "08-28": { bg: "linear-gradient(90deg, #be123c, #fb923c)", text: "🎀 Raksha Bandhan ki dher saari shubhkamnayein! 🎀" },
+                "10-19": { bg: "linear-gradient(90deg, #991b1b, #ef4444)", text: "🏹 Vijayadashami ki shubhkamnayein! Burayi par acchayi ki jeet. 🏹" },
+                "11-08": { bg: "linear-gradient(90deg, #7f1d1d, #ea580c, #f59e0b)", text: "🪔 Shubh Diwali! Roshni ka yeh tyohar aapke jeevan mein sukh-samriddhi laye. 🪔" },
+                "11-13": { bg: "linear-gradient(90deg, #c2410c, #fdba74)", color:"#000", text: "🌅 Chhath Mahaparv ki dher saari shubhkamnayein! Chhathi Maiya sabka kalyan karein. 🌅" },
+                "12-25": { bg: "linear-gradient(90deg, #991b1b, #166534)", text: "🎄 Merry Christmas! Khushiyon aur pyaar ka tyohar. ❄️" }
+            };
+
+            const todayFest = festivals[currentMD];
+
+            if (todayFest) {
+                bannerText = todayFest.text;
+                bgGradient = todayFest.bg;
+                if(todayFest.color) textColor = todayFest.color;
+                
+                // Override website theme colors if festival demands it
+                if(todayFest.pTheme) document.documentElement.style.setProperty('--primary-dark', todayFest.pTheme);
+                if(todayFest.aTheme) document.documentElement.style.setProperty('--accent-blue', todayFest.aTheme);
             }
 
+            // Render Banner if a festival matches today's date
             if (bannerText !== "") {
                 const banner = document.createElement('div');
                 banner.style.background = bgGradient;
