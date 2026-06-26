@@ -4,12 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
-    <title>Sureksha Vision | Best CCTV Camera & Computer Repair in Patna, Danapur & Khagaul</title>
+    <!-- ================= BROWSER TAB LOGO (FAVICON) ================= -->
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <!-- ================= ADVANCED SEO SETTINGS FOR GOOGLE RANKING ================= -->
+    <title>Sureksha Vision | CCTV, Computer Repair, Electric & Web Design Patna</title>
+    <meta name="description"
+        content="Sureksha Vision is Patna & Danapur's best service provider for CCTV Camera Installation, Computer Repair, Electric & Electronic Repair, EPABX Setup, and Custom Website Design. Call 9123188984 for 24/7 fast service.">
+    <meta name="keywords"
+        content="website design Patna, website development Danapur, CCTV installation near me, CCTV repair Patna, computer repair shop, laptop repair Danapur, electric repair service, electronic repair shop near me, electrician in Patna, EPABX intercom setup, Sureksha Vision Patna, Khagaul CCTV IT solution">
+    <meta name="author" content="Sureksha Vision">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Sureksha Vision | CCTV, Computer, Electric & Web Design">
+    <meta property="og:description"
+        content="Best CCTV installation, Computer repair, Electronic fixing & Website Design services in Patna and Danapur.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA">
+    <!-- ================= ADVANCED SEO SETTINGS END ================= -->
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
@@ -18,6 +34,7 @@
         gtag('js', new Date());
         gtag('config', 'G-XXXXXXXXXX');
     </script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -242,12 +259,36 @@
             transition: all 0.4s ease;
             overflow: hidden;
             border-bottom: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
         }
 
         .card-service-premium:hover {
             transform: translateY(-12px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             border-bottom: 4px solid var(--accent-blue);
+        }
+
+        .card-service-premium::after {
+            content: "Click for Demo \f03e";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            background: var(--accent-blue);
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.8rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+        }
+
+        .card-service-premium:hover::after {
+            bottom: 0;
+            opacity: 1;
         }
 
         .icon-box {
@@ -326,7 +367,6 @@
             color: var(--accent-blue) !important;
         }
 
-        /* ================= AI CHATBOT SYSTEM ================= */
         .chatbot-launcher {
             position: fixed;
             bottom: 25px;
@@ -501,6 +541,57 @@
         </div>
     </div>
 
+    <!-- ================= SLIDING IMAGE DEMO MODAL ================= -->
+    <div class="modal fade" id="serviceDemoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
+                <div class="modal-header bg-dark text-white border-0 py-3">
+                    <h5 class="modal-title fw-bold" id="demoModalTitle">Service Demo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-0 text-center">
+                    <div id="demoImageCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                        data-bs-interval="3000">
+                        <div class="carousel-inner" id="carouselInnerContent">
+                            <!-- JS Will Inject Images Here -->
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#demoImageCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#demoImageCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                    <div class="p-4 bg-light">
+                        <p id="demoModalDesc" class="text-muted small mb-2"></p>
+
+                        <div id="demoModalPersuasive"
+                            class="alert alert-warning border-warning fw-bold small text-dark mb-4 py-2"
+                            style="font-size: 0.85rem; line-height: 1.5; text-align: left;">
+                            <!-- JS Will Inject Trust Building Message Here -->
+                        </div>
+
+                        <a href="tel:+919123188984"
+                            class="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm mx-1">
+                            <i class="fa-solid fa-phone me-2"></i>Call Now
+                        </a>
+                        <a href="https://wa.me/919123188984?text=Hello%20Sureksha%20Vision,%20I%20saw%20your%20Service%20Demo."
+                            target="_blank" class="btn btn-success rounded-pill px-4 py-2 fw-bold shadow-sm mx-1">
+                            <i class="fa-brands fa-whatsapp me-2"></i>WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="live-toast" class="live-toast-alert">
         <span class="pulse-dot"></span>
         <span id="toast-message-text">Live: Processing query from Danapur Cantt...</span>
@@ -516,9 +607,8 @@
                 </div>
                 <div class="small">
                     <i class="fa-solid fa-location-dot text-danger me-1"></i>
-                    <a href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer" class="text-light text-decoration-none">
-                        Sureksha Vision, Patna
-                    </a>
+                    <a href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer"
+                        class="text-light text-decoration-none">Sureksha Vision, Patna</a>
                 </div>
                 <div id="text-emergency" class="small">
                     <i class="fa-solid fa-clock text-warning me-1"></i>24/7 Doorstep Emergency Service
@@ -544,10 +634,15 @@
 
     <nav class="navbar navbar-dark main-navbar py-2 sticky-top">
         <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand fw-bold fs-4 text-white" href="#">
-                <i class="fa-solid fa-shield-halved text-warning me-1"></i>SUREKSHA <span
-                    style="color: #fff;">VISION</span>
+
+            <!-- ================= APKA LOGO YAHAN HAI ================= -->
+            <a class="navbar-brand fw-bold fs-4 text-white d-flex align-items-center" href="#">
+                <img src="logo.png" alt="Sureksha Vision Logo"
+                    style="height: 40px; width: auto; margin-right: 10px; border-radius: 4px;">
+                SUREKSHA <span style="color: #fff; font-weight: 300; margin-left: 5px;">VISION</span>
             </a>
+            <!-- ================= LOGO SECTION END ================= -->
+
             <div class="d-flex align-items-center gap-2">
                 <span
                     class="badge bg-dark border border-secondary text-light d-none d-lg-inline-flex align-items-center gap-2 small">
@@ -590,7 +685,9 @@
                             class="btn btn-premium-wa btn-md rounded-pill px-4 py-2">
                             <i class="fa-brands fa-whatsapp me-2"></i> WhatsApp Message
                         </a>
-                        <a id="heroMapBtn" href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer" class="btn btn-light btn-md rounded-pill px-4 py-2 text-dark fw-bold shadow-sm mt-2 mt-sm-0">
+                        <a id="heroMapBtn" href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-light btn-md rounded-pill px-4 py-2 text-dark fw-bold shadow-sm mt-2 mt-sm-0">
                             <i class="fa-solid fa-map-location-dot text-danger me-2"></i> Our Location
                         </a>
                     </div>
@@ -689,10 +786,12 @@
                 </h6>
                 <h3 id="text-serv-title" class="fw-bold fs-4" style="color: var(--primary-dark);">Professional Security
                     & IT Solutions</h3>
+                <p class="text-muted small">Click any service to view a live demo image!</p>
             </div>
+
             <div class="row g-3">
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card card-service-premium p-3 text-center h-100">
+                    <div class="card card-service-premium p-3 text-center h-100 pb-5" onclick="showServiceDemo('cctv')">
                         <div class="icon-box"><i class="fa-solid fa-camera"></i></div>
                         <h5 id="text-serv1-title" class="fw-bold mb-2">CCTV Camera Setup</h5>
                         <p id="text-serv1-desc" class="text-muted small mb-0">HD & IP Cameras, DVR/NVR configuration,
@@ -700,7 +799,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card card-service-premium p-3 text-center h-100">
+                    <div class="card card-service-premium p-3 text-center h-100 pb-5"
+                        onclick="showServiceDemo('intercom')">
                         <div class="icon-box"><i class="fa-solid fa-tty"></i></div>
                         <h5 id="text-serv2-title" class="fw-bold mb-2">EPABX Intercom Systems</h5>
                         <p id="text-serv2-desc" class="text-muted small mb-0">Naye ya purane apartments aur building ke
@@ -708,7 +808,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card card-service-premium p-3 text-center h-100">
+                    <div class="card card-service-premium p-3 text-center h-100 pb-5"
+                        onclick="showServiceDemo('network')">
                         <div class="icon-box"><i class="fa-solid fa-network-wired"></i></div>
                         <h5 id="text-serv3-title" class="fw-bold mb-2">Networking & POE Switches</h5>
                         <p id="text-serv3-desc" class="text-muted small mb-0">Heavy camera networks ke liye static IP
@@ -716,7 +817,8 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card card-service-premium p-3 text-center h-100">
+                    <div class="card card-service-premium p-3 text-center h-100 pb-5"
+                        onclick="showServiceDemo('computer')">
                         <div class="icon-box"><i class="fa-solid fa-laptop-medical"></i></div>
                         <h5 id="text-serv4-title" class="fw-bold mb-2">Computer Hardware & Software</h5>
                         <p id="text-serv4-desc" class="text-muted small mb-0">Laptop/Desktop repair, OS installation,
@@ -724,17 +826,21 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card card-service-premium p-3 text-center h-100">
+                    <div class="card card-service-premium p-3 text-center h-100 pb-5"
+                        onclick="showServiceDemo('electrical')">
                         <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
                         <h5 id="text-serv5-title" class="fw-bold mb-2">Electrical & Electronic Work</h5>
-                        <p id="text-serv5-desc" class="text-muted small mb-0">Ghar aur office ke sabhi electric wiring, appliances repair aur electronic gadgets ka fix.</p>
+                        <p id="text-serv5-desc" class="text-muted small mb-0">Ghar aur office ke sabhi electric wiring,
+                            appliances repair aur electronic gadgets ka fix.</p>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card card-service-premium p-3 text-center h-100">
+                    <div class="card card-service-premium p-3 text-center h-100 pb-5"
+                        onclick="showServiceDemo('website')">
                         <div class="icon-box"><i class="fa-solid fa-laptop-code"></i></div>
                         <h5 id="text-serv6-title" class="fw-bold mb-2">Custom Website Design</h5>
-                        <p id="text-serv6-desc" class="text-muted small mb-0">Customer ki jarurat aur business ke hisaab se modern, fast aur responsive website development.</p>
+                        <p id="text-serv6-desc" class="text-muted small mb-0">School, College, Shop, Office, Hospital
+                            aur har business ke liye customer ki jarurat ke hisaab se custom website development.</p>
                     </div>
                 </div>
             </div>
@@ -870,15 +976,14 @@
 
     <div class="container py-4 reveal-element">
         <div class="row g-4">
-            <div class="col-12 col-lg-6">
-                <div class="p-3 rounded-4 shadow-sm mb-4"
+            <div class="col-12 col-lg-5">
+                <div class="p-3 rounded-4 shadow-sm mb-4 h-100"
                     style="background-color: white; border-top: 4px solid var(--accent-blue);">
                     <h4 id="text-form-title" class="fw-bold mb-1 text-dark fs-5">Get a Free Quote</h4>
                     <p id="text-form-desc" class="text-muted small mb-3">Apna details bharein, hum contact karenge.</p>
                     <form id="quoteFormElement" action="https://api.web3forms.com/submit" method="POST">
                         <input type="hidden" name="access_key" value="6b8e2eaf-62af-4d6f-9879-71a93ef66b4d">
                         <input type="hidden" name="subject" value="New Service Quote Request - Sureksha Vision">
-
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                         <div class="mb-2">
@@ -908,21 +1013,22 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-6">
+            <div class="col-12 col-lg-7">
                 <h4 id="text-faq-title" class="fw-bold mb-1 text-dark fs-5">Aksar Puche Jaane Wale Sawal</h4>
-                <p id="text-faq-desc" class="text-muted small mb-3">Kuch aam sawal jo customers puchte hain.</p>
+                <p id="text-faq-desc" class="text-muted small mb-3">Har service se jude aam sawal aur unke jawab.</p>
                 <div class="accordion" id="faqAccordion">
                     <div class="accordion-item border-0 shadow-sm mb-2 rounded-3 overflow-hidden">
                         <h2 class="accordion-header">
                             <button id="text-faq1-q" class="accordion-button small fw-semibold p-3" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#faq1">
-                                Kya hum mobile par CCTV ka live view dekh sakte hain?
+                                [CCTV] Kya hum mobile par CCTV ka live view dekh sakte hain?
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div id="text-faq1-a" class="accordion-body text-muted small">
-                                Haan bilkul! Hum aapke router aur NVR/DVR ko secure tarike se configure karenge taaki
-                                aap duniya ke kisi bhi kone se apne mobile par live video dekh sakein.
+                                Haan bilkul! Hum aapke router aur DVR/NVR ko securely configure karte hain, jisse aap
+                                duniya ke kisi bhi kone se 24/7 apne ghar ya office ki live monitoring HD quality me
+                                apne smartphone par kar sakte hain.
                             </div>
                         </div>
                     </div>
@@ -930,13 +1036,59 @@
                         <h2 class="accordion-header">
                             <button id="text-faq2-q" class="accordion-button collapsed small fw-semibold p-3"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                Intercom configuration me kitna samay lagta hai?
+                                [Intercom] Multi-storey apartment me EPABX setup me kitna waqt lagta hai?
                             </button>
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div id="text-faq2-a" class="accordion-body text-muted small">
-                                Ye building ke size aur lines par depend karta hai. Par humari team fast execution karti
-                                hai aur multi-line programming ko jaldi complete kar deti hai.
+                                Humari expert team bina kisi tod-fod (drilling) ke safai se wiring aur programming karti
+                                hai. Building ke size ke hisaab se hum fast execution ensure karte hain taaki residents
+                                ko pareshani na ho.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 shadow-sm mb-2 rounded-3 overflow-hidden">
+                        <h2 class="accordion-header">
+                            <button id="text-faq3-q" class="accordion-button collapsed small fw-semibold p-3"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                [Computer/Laptop] Mera system bahut slow chal raha hai, kya naya lena padega?
+                            </button>
+                        </h2>
+                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div id="text-faq3-a" class="accordion-body text-muted small">
+                                Naya lene ki bilkul zaroorat nahi hai! Aksar purane laptops/PC me sirf SSD upgrade aur
+                                RAM badhane se unki speed 10 guna tak badh jati hai. Hum kam kharch me aapke system ko
+                                naye jaisa fast bana dete hain.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 shadow-sm mb-2 rounded-3 overflow-hidden">
+                        <h2 class="accordion-header">
+                            <button id="text-faq4-q" class="accordion-button collapsed small fw-semibold p-3"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                [Electrical] Kya aap ghar ki poori wiring aur electronic appliances repair karte hain?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div id="text-faq4-a" class="accordion-body text-muted small">
+                                Ji haan, humare certified electricians short-circuit fixing se lekar nayi wiring, panel
+                                setup, aur faulty electronic gadgets ki safe aur reliable repairing aapke doorstep par
+                                provide karte hain.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 shadow-sm mb-2 rounded-3 overflow-hidden">
+                        <h2 class="accordion-header">
+                            <button id="text-faq5-q" class="accordion-button collapsed small fw-semibold p-3"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                [Web Design] Mere business ke liye website banwane ka kya fayda hoga?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div id="text-faq5-a" class="accordion-body text-muted small">
+                                Website aapke business ki 'Digital Dukaan' hoti hai jo 24/7 khuli rehti hai. Hum aisi
+                                fast, modern aur Google-friendly website design karte hain jisse naye customers seedhe
+                                aap tak pahunch sakein aur aapki sales badhe.
                             </div>
                         </div>
                     </div>
@@ -999,7 +1151,6 @@
                     <form id="feedbackFormElement" action="https://api.web3forms.com/submit" method="POST">
                         <input type="hidden" name="access_key" value="6b8e2eaf-62af-4d6f-9879-71a93ef66b4d">
                         <input type="hidden" name="subject" value="New Customer Feedback - Sureksha Vision">
-
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
                         <div class="row g-3">
@@ -1064,8 +1215,9 @@
                         <h6 id="text-loc-title" class="fw-bold text-warning mb-2"><i
                                 class="fa-solid fa-map-location-dot me-2"></i>Our Location</h6>
                         <p class="mb-1 small"><i class="fa-solid fa-location-dot text-danger me-1"></i> <strong
-                                id="text-loc-addr">Address:</strong> <a href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA" target="_blank" rel="noopener noreferrer" class="text-decoration-none text-light">Usri, Jamsaut Road, Near Danapur Cantt, Patna,
-                            Bihar - 801503</a></p>
+                                id="text-loc-addr">Address:</strong> <a href="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA"
+                                target="_blank" rel="noopener noreferrer" class="text-decoration-none text-light">Usri,
+                                Jamsaut Road, Near Danapur Cantt, Patna, Bihar - 801503</a></p>
                         <p class="mb-2 small text-muted"><i class="fa-solid fa-gopuram text-warning me-1"></i> <strong
                                 id="text-loc-land">Landmark:</strong> Near Kabristan, Bandh Road</p>
                         <div class="text-center text-md-start">
@@ -1135,6 +1287,104 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script type="text/javascript">
+        // ================= SERVICE DEMO POPUP LOGIC WITH SLIDER AND PERSUASIVE MESSAGES =================
+        const serviceDemos = {
+            cctv: {
+                images: [
+                    "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1548611716-160db12e434f?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=800&q=80"
+                ],
+                title: "CCTV Camera Setup Demo",
+                descHi: "Hum High-definition IP cameras aur advanced NVR setup ka perfect view aur secure networking dete hain.",
+                descEn: "We provide perfect live viewing and secure networking with High-definition IP cameras and advanced NVR setups.",
+                persuasiveHi: "<i class='fa-solid fa-shield-halved text-warning fs-5 me-2'></i> Apne ghar aur business ko chori se bachayein! Aaj hi humse best quality ka CCTV setup karwayein aur payein <strong>1-Year Free Service Warranty</strong>. Der na karein, abhi order karein!",
+                persuasiveEn: "<i class='fa-solid fa-shield-halved text-warning fs-5 me-2'></i> Protect your home and business from theft! Get top-quality CCTV setup today with a <strong>1-Year Free Service Warranty</strong>. Don't wait, book now!"
+            },
+            intercom: {
+                images: [
+                    "https://images.unsplash.com/photo-1516245834210-c4c142787335?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1596526131083-e8c638c9c6c3?auto=format&fit=crop&w=800&q=80"
+                ],
+                title: "EPABX Intercom Demo",
+                descHi: "Apartments aur offices ke liye clean multi-line intercom programming without messy drilling.",
+                descEn: "Clean multi-line intercom programming for apartments and offices without messy drilling.",
+                persuasiveHi: "<i class='fa-solid fa-headset text-warning fs-5 me-2'></i> Building me communication banayein smart aur aasan! Humari expert team bina kisi tod-fod ke fast intercom setup karti hai. <strong>Best price guaranteed!</strong>",
+                persuasiveEn: "<i class='fa-solid fa-headset text-warning fs-5 me-2'></i> Make communication in your building smart and easy! Our expert team provides fast intercom setup without any messy drilling. <strong>Best price guaranteed!</strong>"
+            },
+            network: {
+                images: [
+                    "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80"
+                ],
+                title: "Networking & POE Demo",
+                descHi: "Heavy load cameras aur IT setup ke liye Professional structured cabling aur POE switch routing.",
+                descEn: "Professional structured cabling and POE switch routing for heavy-load cameras and IT setups.",
+                persuasiveHi: "<i class='fa-solid fa-wifi text-warning fs-5 me-2'></i> Bar-bar internet disconnect hone se pareshan? Ek bar humse professional networking karwayein aur payein <strong>Seamless Speed</strong>. Abhi book karein!",
+                persuasiveEn: "<i class='fa-solid fa-wifi text-warning fs-5 me-2'></i> Tired of frequent internet disconnections? Get professional networking from us once and enjoy <strong>Seamless Speed</strong>. Book now!"
+            },
+            computer: {
+                images: [
+                    "https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1588508065123-287b28e01d36?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1531297172813-ea9741a4a161?auto=format&fit=crop&w=800&q=80"
+                ],
+                title: "Computer Repair Demo",
+                descHi: "Laptop/Desktop motherboard hardware repair aur SSD upgrade for lightning-fast speed.",
+                descEn: "Laptop/Desktop motherboard hardware repair and SSD upgrades for lightning-fast speed.",
+                persuasiveHi: "<i class='fa-solid fa-microchip text-warning fs-5 me-2'></i> Slow laptop ko banayein naye jaisa fast! Kam kharch me SSD upgrade aur hardware repair karwayein. <strong>Free diagnostic</strong> ke liye turant sampark karein.",
+                persuasiveEn: "<i class='fa-solid fa-microchip text-warning fs-5 me-2'></i> Make your slow laptop as fast as new! Get SSD upgrades and hardware repairs at a low cost. Contact us immediately for a <strong>Free Diagnostic</strong>."
+            },
+            electrical: {
+                images: [
+                    "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1544724569-5f546fd6f2b6?auto=format&fit=crop&w=800&q=80"
+                ],
+                title: "Electrical Work Demo",
+                descHi: "Safe and secure electrical panel wiring, short circuit fixing aur electronic repair.",
+                descEn: "Safe and secure electrical panel wiring, short circuit fixing, and electronic repair.",
+                persuasiveHi: "<i class='fa-solid fa-plug-circle-bolt text-warning fs-5 me-2'></i> Ghar ka koi switch kharab ho ya poori wiring karni ho, humare certified electricians par bharosa karein. <strong>Safe aur 100% reliable service</strong> aaj hi book karein.",
+                persuasiveEn: "<i class='fa-solid fa-plug-circle-bolt text-warning fs-5 me-2'></i> Whether a switch is broken or you need complete wiring, trust our certified electricians. Book a <strong>Safe and 100% reliable service</strong> today."
+            },
+            website: {
+                images: [
+                    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=800&q=80"
+                ],
+                title: "Website Design Demo",
+                descHi: "School, College, Hospital ya Office ke liye banayi gayi modern aur Google-friendly website.",
+                descEn: "Modern and Google-friendly websites built for Schools, Colleges, Hospitals, or Offices.",
+                persuasiveHi: "<i class='fa-solid fa-chart-line text-warning fs-5 me-2'></i> Apne business ko online le jayein aur sales doguni karein! Hum banayenge aapke liye ek shandaar aur fast website, wo bhi aapke budget me. <strong>Aaj hi project start karein!</strong>",
+                persuasiveEn: "<i class='fa-solid fa-chart-line text-warning fs-5 me-2'></i> Take your business online and double your sales! We will build a stunning and fast website for you, right within your budget. <strong>Start your project today!</strong>"
+            }
+        };
+
+        function showServiceDemo(type) {
+            const data = serviceDemos[type];
+            const isHindi = document.getElementById('language-switcher').value === 'hi';
+
+            document.getElementById('demoModalTitle').innerText = data.title;
+            document.getElementById('demoModalDesc').innerText = isHindi ? data.descHi : data.descEn;
+            document.getElementById('demoModalPersuasive').innerHTML = isHindi ? data.persuasiveHi : data.persuasiveEn;
+
+            const carouselInner = document.getElementById('carouselInnerContent');
+            let html = '';
+            data.images.forEach((imgSrc, index) => {
+                let activeClass = index === 0 ? 'active' : '';
+                html += `<div class="carousel-item ${activeClass}">
+                            <img src="${imgSrc}" class="d-block w-100" style="object-fit: cover; height: 350px;" alt="Service Demo Image">
+                         </div>`;
+            });
+            carouselInner.innerHTML = html;
+
+            var demoModal = new bootstrap.Modal(document.getElementById('serviceDemoModal'));
+            demoModal.show();
+        }
+
         // ================= DYNAMIC RANDOM THEME GENERATOR =================
         function applyRandomTheme() {
             const themes = [
@@ -1150,40 +1400,34 @@
             document.documentElement.style.setProperty('--accent-blue', randomTheme.accent);
             document.documentElement.style.setProperty('--glow-yellow', randomTheme.glow);
         }
-
         applyRandomTheme();
 
-        // ================= ADVANCED FESTIVAL THEME ENGINE (CALENDAR MAPPED) =================
+        // ================= ADVANCED FESTIVAL THEME ENGINE =================
         function applyFestiveTheme() {
             const today = new Date();
-            const m = today.getMonth() + 1; // Month 1-12
+            const m = today.getMonth() + 1;
             const d = today.getDate();
-            // Create MM-DD format for matching
-            const currentMD = (m < 10 ? '0'+m : m) + '-' + (d < 10 ? '0'+d : d);
+            const currentMD = (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d);
 
             let bannerText = "";
             let bgGradient = "";
             let textColor = "#fff";
 
-            // Complete Festival Calendar Mapping for current cycles (Includes Fixed & Lunar approximations)
             const festivals = {
                 "01-01": { bg: "linear-gradient(90deg, #1e3a8a, #9333ea)", text: "🎉 Happy New Year! Naye saal ki hardik shubhkamnayein! 🎉" },
                 "01-14": { bg: "linear-gradient(90deg, #b45309, #fbbf24)", text: "🌾 Makar Sankranti ki Hardik Shubhkamnayein! 🌾" },
-                "01-26": { bg: "linear-gradient(90deg, #ff9933, #ffffff, #138808)", color:"#000", text: "🇮🇳 Happy Republic Day! Jai Hind! 🇮🇳" },
+                "01-26": { bg: "linear-gradient(90deg, #ff9933, #ffffff, #138808)", color: "#000", text: "🇮🇳 Happy Republic Day! Jai Hind! 🇮🇳" },
                 "03-03": { bg: "linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6)", text: "🎨 Happy Holi! Rango ke is tyohar mein sabhi ke jeevan mein khushiyan aayein. 🎨" },
                 "03-20": { bg: "linear-gradient(90deg, #064e3b, #047857)", text: "🌙 Eid-ul-Fitr Mubarak! Aman aur bhaichare ka tyohar. 🌙", pTheme: '#064e3b', aTheme: '#10b981' },
                 "05-27": { bg: "linear-gradient(90deg, #064e3b, #047857)", text: "🌙 Eid al-Adha Mubarak! 🌙", pTheme: '#064e3b', aTheme: '#10b981' },
-                
-                // Muharram Tracking (Around June 25, 26, 27)
                 "06-25": { bg: "linear-gradient(90deg, #111827, #064e3b, #111827)", text: "🖤 Youm-e-Ashura (Muharram). Haq aur insaaf ke liye di gayi kurbani ko salaam. 🖤", pTheme: '#000000', aTheme: '#10b981' },
                 "06-26": { bg: "linear-gradient(90deg, #111827, #064e3b, #111827)", text: "🖤 Youm-e-Ashura (Muharram). Haq aur insaaf ke liye di gayi kurbani ko salaam. 🖤", pTheme: '#000000', aTheme: '#10b981' },
                 "06-27": { bg: "linear-gradient(90deg, #111827, #064e3b, #111827)", text: "🖤 Youm-e-Ashura (Muharram). Haq aur insaaf ke liye di gayi kurbani ko salaam. 🖤", pTheme: '#000000', aTheme: '#10b981' },
-                
-                "08-15": { bg: "linear-gradient(90deg, #ff9933, #ffffff, #138808)", color:"#000", text: "🇮🇳 Happy Independence Day! Jai Hind! 🇮🇳" },
+                "08-15": { bg: "linear-gradient(90deg, #ff9933, #ffffff, #138808)", color: "#000", text: "🇮🇳 Happy Independence Day! Jai Hind! 🇮🇳" },
                 "08-28": { bg: "linear-gradient(90deg, #be123c, #fb923c)", text: "🎀 Raksha Bandhan ki dher saari shubhkamnayein! 🎀" },
                 "10-19": { bg: "linear-gradient(90deg, #991b1b, #ef4444)", text: "🏹 Vijayadashami ki shubhkamnayein! Burayi par acchayi ki jeet. 🏹" },
                 "11-08": { bg: "linear-gradient(90deg, #7f1d1d, #ea580c, #f59e0b)", text: "🪔 Shubh Diwali! Roshni ka yeh tyohar aapke jeevan mein sukh-samriddhi laye. 🪔" },
-                "11-13": { bg: "linear-gradient(90deg, #c2410c, #fdba74)", color:"#000", text: "🌅 Chhath Mahaparv ki dher saari shubhkamnayein! Chhathi Maiya sabka kalyan karein. 🌅" },
+                "11-13": { bg: "linear-gradient(90deg, #c2410c, #fdba74)", color: "#000", text: "🌅 Chhath Mahaparv ki dher saari shubhkamnayein! Chhathi Maiya sabka kalyan karein. 🌅" },
                 "12-25": { bg: "linear-gradient(90deg, #991b1b, #166534)", text: "🎄 Merry Christmas! Khushiyon aur pyaar ka tyohar. ❄️" }
             };
 
@@ -1192,14 +1436,11 @@
             if (todayFest) {
                 bannerText = todayFest.text;
                 bgGradient = todayFest.bg;
-                if(todayFest.color) textColor = todayFest.color;
-                
-                // Override website theme colors if festival demands it
-                if(todayFest.pTheme) document.documentElement.style.setProperty('--primary-dark', todayFest.pTheme);
-                if(todayFest.aTheme) document.documentElement.style.setProperty('--accent-blue', todayFest.aTheme);
+                if (todayFest.color) textColor = todayFest.color;
+                if (todayFest.pTheme) document.documentElement.style.setProperty('--primary-dark', todayFest.pTheme);
+                if (todayFest.aTheme) document.documentElement.style.setProperty('--accent-blue', todayFest.aTheme);
             }
 
-            // Render Banner if a festival matches today's date
             if (bannerText !== "") {
                 const banner = document.createElement('div');
                 banner.style.background = bgGradient;
@@ -1213,10 +1454,8 @@
                 document.body.prepend(banner);
             }
         }
-
         applyFestiveTheme();
 
-        // ================= BACKGROUND IMAGE ROTATOR ENGINE =================
         function startBackgroundRotator() {
             const heroImages = [
                 "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80",
@@ -1224,20 +1463,16 @@
                 "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1920&q=80",
                 "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=80"
             ];
-
             let currentImgIndex = 0;
             const heroSection = document.getElementById('dynamicHeroSection');
-
             if (!heroSection) return;
             heroSection.style.backgroundImage = `url('${heroImages[0]}')`;
-
             setInterval(() => {
                 currentImgIndex = (currentImgIndex + 1) % heroImages.length;
                 heroSection.style.backgroundImage = `url('${heroImages[currentImgIndex]}')`;
             }, 5000);
         }
 
-        // ================= SHOW WELCOME POPUP ON LOAD =================
         window.addEventListener('DOMContentLoaded', () => {
             if (!sessionStorage.getItem('greeted')) {
                 setTimeout(() => {
@@ -1249,10 +1484,8 @@
             startBackgroundRotator();
         });
 
-        // ================= DAILY GREETING LOGIC =================
         function updateDailyGreeting(lang) {
             const todayIndex = new Date().getDay();
-
             const quotesHi = [
                 "✨ शुभ रविवार! आज का दिन आराम और अपनों के साथ बिताएं। कल से फिर नई उड़ान भरनी है! ✨",
                 "✨ शुभ सोमवार! नए हफ्ते की शुरुआत एक नई ऊर्जा और नए लक्ष्य के साथ करें। ✨",
@@ -1277,7 +1510,6 @@
                 greetingBar.innerHTML = lang === 'hi' ? quotesHi[todayIndex] : quotesEn[todayIndex];
             }
         }
-
         updateDailyGreeting('hi');
 
         function getCleanDeviceName() {
@@ -1294,11 +1526,7 @@
             const trackingForm = document.getElementById('hiddenLeadForm');
             if (!trackingForm) return;
             const payLoad = new FormData(trackingForm);
-            fetch(trackingForm.action, {
-                method: 'POST',
-                body: payLoad,
-                headers: { 'Accept': 'application/json' }
-            }).catch(e => console.log("Tracking request throttled or blocked."));
+            fetch(trackingForm.action, { method: 'POST', body: payLoad, headers: { 'Accept': 'application/json' } }).catch(e => console.log("Tracking request throttled or blocked."));
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -1387,18 +1615,16 @@
         let leadName = "";
         let leadPhone = "";
 
-        // SECURITY FIX: XSS Protection implemented here using textContent for user messages
         function appendMessage(text, sender) {
             const container = document.getElementById('chatMessages');
             if (!container) return;
             const bubble = document.createElement('div');
             bubble.className = `chat-bubble ${sender}`;
 
-            // Critical Fix: User inputs are inserted as plain text, not HTML
             if (sender === 'user') {
                 bubble.textContent = text;
             } else {
-                bubble.innerHTML = text; // Bot replies are trusted and contain HTML like <br>
+                bubble.innerHTML = text;
             }
 
             container.appendChild(bubble);
@@ -1421,7 +1647,6 @@
             setTimeout(() => {
                 let reply = "";
                 if (chatStep === 1) {
-                    // Sanitize leadName for further use in HTML
                     leadName = msg.replace(/</g, "<").replace(/>/g, ">");
                     document.getElementById('hiddenLeadName').value = leadName;
                     reply = `Thank you, **${leadName}**! <br><br>Ab kripya aapna **Mobile Number** share karne ki kripa karein?`;
@@ -1489,7 +1714,7 @@
                 btnWa: '<i class="fa-brands fa-whatsapp me-2"></i> WhatsApp Message',
                 aboutSub: 'Hamare Bare Mein',
                 aboutTitle: 'Technical Expertise Aur Deep Problem-Solving',
-                aboutDesc1: 'Sureksha Vision ek B.Tech graduate ke netritva me chalne wali high-end technical enterprise hai. Hum sirf cameras fit nahi karte, balki computer hardware troubleshooting, complex server routing, cybersecurity infrastructure aur industrial electrical networks ke deep implementation ko handle karte hain.',
+                aboutDesc1: 'Sureksha Vision ek B.Tech graduate ke netritva me chalne wali high-end technical enterprise hai. Hum sirf cameras fit nahi সীম करते, balki computer hardware troubleshooting, complex server routing, cybersecurity infrastructure aur industrial electrical networks ke deep implementation ko handle karte hain.',
                 aboutDesc2: 'Hum bade multi-apartment housings aur commercial complexes me DHCP failure hone par automatic system downtime se bachane ke liye safe Static IP network deployment karne me expert hain.',
                 aboutCardtitle: 'B.Tech Led Team',
                 aboutCarddesc: 'High-level analytical skills aur enterprise infrastructure solutions.',
@@ -1512,11 +1737,10 @@
                 serv3Desc: 'Heavy camera networks ke liye static IP settings, high-quality POE switches setup aur complete routing troubleshoot.',
                 serv4Title: 'Computer Hardware & Software',
                 serv4Desc: 'Laptop/Desktop repair, OS installation, malware/virus removal, aur performance boost ke liye hardware upgrade (RAM/SSD).',
-                // New Services Added
                 serv5Title: 'Electrical & Electronic Work',
                 serv5Desc: 'Ghar aur office ke sabhi electric wiring, appliances repair aur electronic gadgets ka fix.',
                 serv6Title: 'Custom Website Design',
-                serv6Desc: 'Customer ki jarurat aur business ke hisaab se modern, fast aur responsive website development.',
+                serv6Desc: 'School, College, Shop, Office, Hospital aur har business ke liye customer ki jarurat ke hisaab se custom website development.',
                 projSub: 'Hamare Kamyab Projects',
                 projTitle: 'Proven Track Record & Case Studies',
                 proj1Title: '<i class="fa-solid fa-building me-2" style="color: var(--accent-blue);"></i>16-Channel Apartment NVR Security',
@@ -1553,11 +1777,17 @@
                 lblCv: 'Upload CV (PDF Only)',
                 jobBtn: 'Upload & Apply Now',
                 faqTitle: 'Aksar Puche Jaane Wale Sawal',
-                faqDesc: 'Kuch aam sawal jo customers puchte hain.',
-                faq1Q: 'Kya hum mobile par CCTV ka live view dekh sakte hain?',
-                faq1A: 'Haan bilkul! Hum aapke router aur NVR/DVR ko secure tarike se configure karenge taaki aap duniya ke kisi bhi kone se apne mobile par live video dekh sakein.',
-                faq2Q: 'Intercom configuration me kitna samay lagta hai?',
-                faq2A: 'Ye building ke size aur lines par depend karta hai. Par humari team fast execution karti hai aur multi-line programming ko jaldi complete kar deti hai.',
+                faqDesc: 'Har service se jude aam sawal aur unke jawab.',
+                faq1Q: '[CCTV] Kya hum mobile par CCTV ka live view dekh sakte hain?',
+                faq1A: 'Haan bilkul! Hum aapke router aur DVR/NVR ko securely configure karte hain, jisse aap duniya ke kisi bhi kone se 24/7 apne ghar ya office ki live monitoring HD quality me apne smartphone par kar sakte hain.',
+                faq2Q: '[Intercom] Multi-storey apartment me EPABX setup me kitna waqt lagta hai?',
+                faq2A: 'Humari expert team bina kisi tod-fod (drilling) ke safai se wiring aur programming karti hai. Building ke size ke hisaab se hum fast execution ensure karte hain taaki residents ko pareshani na ho.',
+                faq3Q: '[Computer/Laptop] Mera system bahut slow chal raha hai, kya naya lena padega?',
+                faq3A: 'Naya lene ki bilkul zaroorat nahi hai! Aksar purane laptops/PC me sirf SSD upgrade aur RAM badhane se unki speed 10 guna tak badh jati hai. Hum kam kharch me aapke system ko naye jaisa fast bana dete hain.',
+                faq4Q: '[Electrical] Kya aap ghar ki poori wiring aur electronic appliances repair karte hain?',
+                faq4A: 'Ji haan, humare certified electricians short-circuit fixing se lekar nayi wiring, panel setup, aur faulty electronic gadgets ki safe aur reliable repairing aapke doorstep par provide karte hain.',
+                faq5Q: '[Web Design] Mere business ke liye website banwane ka kya fayda hoga?',
+                faq5A: 'Website aapke business ki \'Digital Dukaan\' hoti hai jo 24/7 khuli rehti hai. Hum aisi fast, modern aur Google-friendly website design karte hain jisse naye customers seedhe aap tak pahunch sakein aur aapki sales badhe.',
                 footDesc: 'Hum aapke poore business aur residential security ka dhyan rakhte hain. Aaj hi sampark karein aur free consultation payein.',
                 footCall: 'Call Now:',
                 footEmail: 'Email Us:',
@@ -1603,11 +1833,10 @@
                 serv3Desc: 'Static IP configuration for heavy networks, PoE switches setup, and complete network troubleshooting.',
                 serv4Title: 'Computer Hardware & Software',
                 serv4Desc: 'Complete desktop/laptop repair, OS installation, malware/virus removal, and hardware upgrades (RAM/SSD) for optimal performance.',
-                // New Services Added
                 serv5Title: 'Electrical & Electronics',
                 serv5Desc: 'Complete electrical wiring, appliance repair, and electronic gadget troubleshooting for homes and offices.',
                 serv6Title: 'Custom Website Design',
-                serv6Desc: 'Modern, fast, and responsive website development tailored to your specific business needs.',
+                serv6Desc: 'Custom website development for Schools, Colleges, Shops, Offices, Hospitals, and all businesses tailored to customer needs.',
                 projSub: 'Our Successful Projects',
                 projTitle: 'Proven Track Record & Case Studies',
                 proj1Title: '<i class="fa-solid fa-building me-2" style="color: var(--accent-blue);"></i>16-Channel Apartment NVR Security',
@@ -1644,11 +1873,17 @@
                 lblCv: 'Upload CV (PDF Only)',
                 jobBtn: 'Upload & Apply Now',
                 faqTitle: 'Frequently Asked Questions',
-                faqDesc: 'Common queries raised by our valuable clients.',
-                faq1Q: 'Can we view the CCTV live feed on mobile?',
-                faq1A: 'Yes, absolutely! We configure your router and NVR/DVR securely so you can monitor live video streaming from anywhere in the world.',
-                faq2Q: 'How long does it take for Intercom configuration?',
-                faq2A: 'It completely depends on the building size and total active lines. However, our team ensures fast execution with zero local disturbance.',
+                faqDesc: 'Common queries related to our different services.',
+                faq1Q: '[CCTV] Can we view the CCTV live feed on our mobile phones?',
+                faq1A: 'Yes, absolutely! We configure your router and NVR/DVR securely so you can monitor live HD video streaming from anywhere in the world 24/7 on your smartphone.',
+                faq2Q: '[Intercom] How long does it take for a multi-storey EPABX configuration?',
+                faq2A: 'Our expert team handles the wiring and programming cleanly without messy drilling. We ensure fast execution tailored to the building size without causing inconvenience to residents.',
+                faq3Q: '[Computer/Laptop] My system is running very slow. Do I need to buy a new one?',
+                faq3A: 'Not at all! Upgrading to an SSD and expanding the RAM can boost an older system’s speed by up to 10 times. We make your computer lightning-fast at a fraction of the cost of a new one.',
+                faq4Q: '[Electrical] Do you repair home wiring and electronic appliances?',
+                faq4A: 'Yes, our certified electricians provide safe and reliable doorstep services, ranging from fixing short circuits and new panel wiring to repairing faulty electronic gadgets.',
+                faq5Q: '[Web Design] What is the benefit of getting a website designed for my business?',
+                faq5A: 'A website acts as your 24/7 digital storefront. We design fast, modern, and Google-friendly websites that help new customers find you directly, ultimately boosting your sales.',
                 footDesc: 'We take complete care of your residential and business security infrastructure. Contact us today for a free consultation.',
                 footCall: 'Call Now:',
                 footEmail: 'Email Us:',
@@ -1701,7 +1936,6 @@
             document.getElementById('text-serv3-desc').innerText = data.serv3Desc;
             document.getElementById('text-serv4-title').innerText = data.serv4Title;
             document.getElementById('text-serv4-desc').innerText = data.serv4Desc;
-            // Language updates for the new services
             document.getElementById('text-serv5-title').innerText = data.serv5Title;
             document.getElementById('text-serv5-desc').innerText = data.serv5Desc;
             document.getElementById('text-serv6-title').innerText = data.serv6Title;
@@ -1742,12 +1976,20 @@
             document.getElementById('text-lbl-jobprofile').innerText = data.lblJobprofile;
             document.getElementById('text-lbl-cv').innerText = data.lblCv;
             document.getElementById('text-job-btn').innerText = data.jobBtn;
+
             document.getElementById('text-faq-title').innerText = data.faqTitle;
             document.getElementById('text-faq-desc').innerText = data.faqDesc;
             document.getElementById('text-faq1-q').innerText = data.faq1Q;
             document.getElementById('text-faq1-a').innerText = data.faq1A;
             document.getElementById('text-faq2-q').innerText = data.faq2Q;
             document.getElementById('text-faq2-a').innerText = data.faq2A;
+            document.getElementById('text-faq3-q').innerText = data.faq3Q;
+            document.getElementById('text-faq3-a').innerText = data.faq3A;
+            document.getElementById('text-faq4-q').innerText = data.faq4Q;
+            document.getElementById('text-faq4-a').innerText = data.faq4A;
+            document.getElementById('text-faq5-q').innerText = data.faq5Q;
+            document.getElementById('text-faq5-a').innerText = data.faq5A;
+
             document.getElementById('text-foot-desc').innerText = data.footDesc;
             document.getElementById('text-foot-call').innerText = data.footCall;
             document.getElementById('text-foot-email').innerText = data.footEmail;
@@ -1757,6 +1999,72 @@
             document.getElementById('text-loc-land').innerText = data.locLand;
             document.getElementById('footerWaChatBtn').innerHTML = data.locBtn;
         }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["LocalBusiness", "ProfessionalService", "Electrician"],
+      "name": "Sureksha Vision",
+      "description": "Sureksha Vision provides the best CCTV camera installation, computer repair, laptop repair, electric works, electronic repairing, and custom website design services in Patna.",
+      "telephone": "+919123188984",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Usri, Jamsaut Road, Near Danapur Cantt",
+        "addressLocality": "Patna",
+        "addressRegion": "Bihar",
+        "postalCode": "801503",
+        "addressCountry": "IN"
+      },
+      "areaServed": [
+        {"@type": "City", "name": "Patna"},
+        {"@type": "City", "name": "Danapur"},
+        {"@type": "City", "name": "Khagaul"}
+      ],
+      "url": "Https://maps.app.goo.gl/pu3zZiRf9USDarJRA",
+      "priceRange": "₹300 - ₹5000",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Sureksha Vision Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "CCTV Camera Installation & Repair"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Computer & Laptop Repair"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Electrical Wiring & Repair"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Electronic Gadget Repair"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Website Design & Development"
+            }
+          }
+        ]
+      }
+    }
     </script>
 </body>
 
