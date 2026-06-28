@@ -8,10 +8,8 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
-    <!-- ================= BROWSER TAB LOGO (FAVICON) ================= -->
     <link rel="icon" href="logo.png" type="image/png">
 
-    <!-- ================= ADVANCED SEO SETTINGS FOR GOOGLE RANKING ================= -->
     <title>Sureksha Vision | CCTV, Computer Repair, Electric & Web Design Patna</title>
     <meta name="description"
         content="Sureksha Vision is Patna & Danapur's best service provider for CCTV Camera Installation, Computer Repair, Electric & Electronic Repair, EPABX Setup, and Custom Website Design. Call 9123188984 for 24/7 fast service.">
@@ -25,8 +23,6 @@
         content="Best CCTV installation, Computer repair, Electronic fixing & Website Design services in Patna and Danapur.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="Https://maps.app.goo.gl/pu3zZiRf9USDarJRA">
-    <!-- ================= ADVANCED SEO SETTINGS END ================= -->
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -40,17 +36,122 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
-            overflow-x: hidden;
-            transition: all 0.5s ease;
-        }
-
         :root {
+            /* Dynamic Theme Variables */
             --primary-dark: #0f172a;
             --accent-blue: #0284c7;
             --glow-yellow: #f59e0b;
+
+            /* Light/Dark Mode Variables */
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --text-muted: #6c757d;
+        }
+
+        /* Dark Mode Theme Definition */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #f8f9fa;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* Bootstrap Overrides for Dark Mode */
+        [data-theme="dark"] .bg-white,
+        [data-theme="dark"] .bg-light {
+            background-color: var(--card-bg) !important;
+        }
+
+        [data-theme="dark"] .text-dark {
+            color: var(--text-color) !important;
+        }
+
+        [data-theme="dark"] .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        [data-theme="dark"] .card-service-premium,
+        [data-theme="dark"] .price-card,
+        [data-theme="dark"] .modal-content,
+        [data-theme="dark"] .profile-section,
+        [data-theme="dark"] .chatbot-container,
+        [data-theme="dark"] .chatbot-options,
+        [data-theme="dark"] .chatbot-input-area {
+            background-color: var(--card-bg) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .accordion-item {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .accordion-button {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .accordion-button:not(.collapsed) {
+            background-color: var(--primary-dark);
+            color: white;
+        }
+
+        [data-theme="dark"] .brand-badge {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .chatbot-messages {
+            background-color: var(--bg-color);
+        }
+
+        [data-theme="dark"] .chat-bubble.bot {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .chat-btn-opt {
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .chat-btn-opt:hover {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .chatbot-input-area input {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .bg-white,
+        .bg-light,
+        .text-dark,
+        .text-muted,
+        .card-service-premium,
+        .price-card {
+            transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease;
         }
 
         .daily-greeting-bar {
@@ -157,6 +258,11 @@
 
         .live-toast-alert.show-popup {
             transform: translateX(0);
+        }
+
+        [data-theme="dark"] .live-toast-alert {
+            background: var(--card-bg);
+            color: var(--text-color);
         }
 
         .reveal-element {
@@ -304,6 +410,10 @@
             font-size: 1.8rem;
         }
 
+        [data-theme="dark"] .icon-box {
+            background: var(--bg-color);
+        }
+
         .profile-section {
             background: linear-gradient(to bottom, #ffffff, #f1f5f9);
             border-top: 5px solid var(--accent-blue);
@@ -311,7 +421,7 @@
 
         @media (min-width: 768px) {
             .profile-section {
-                background: linear-gradient(to right, #ffffff, #f1f5f9);
+                background: linear-gradient(to right, var(--card-bg), var(--bg-color));
                 border-top: none;
                 border-left: 5px solid var(--accent-blue);
             }
@@ -334,6 +444,11 @@
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             padding: 20px;
+        }
+
+        [data-theme="dark"] .feature-badge {
+            background: var(--card-bg);
+            border-color: var(--border-color);
         }
 
         .brand-badge {
@@ -541,7 +656,6 @@
         </div>
     </div>
 
-    <!-- ================= SLIDING IMAGE DEMO MODAL ================= -->
     <div class="modal fade" id="serviceDemoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content border-0 rounded-4 shadow-lg overflow-hidden">
@@ -555,7 +669,6 @@
                     <div id="demoImageCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
                         data-bs-interval="3000">
                         <div class="carousel-inner" id="carouselInnerContent">
-                            <!-- JS Will Inject Images Here -->
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#demoImageCarousel"
                             data-bs-slide="prev">
@@ -575,7 +688,6 @@
                         <div id="demoModalPersuasive"
                             class="alert alert-warning border-warning fw-bold small text-dark mb-4 py-2"
                             style="font-size: 0.85rem; line-height: 1.5; text-align: left;">
-                            <!-- JS Will Inject Trust Building Message Here -->
                         </div>
 
                         <a href="tel:+919123188984"
@@ -626,6 +738,14 @@
                     <option value="hi" selected>हिन्दी (Hindi)</option>
                     <option value="en">English</option>
                 </select>
+
+                <span class="text-secondary mx-1" style="opacity: 0.5;">|</span>
+
+                <i class="fa-solid fa-sun text-warning" id="theme-icon"></i>
+                <select id="theme-switcher" onchange="setThemeMode(this.value)">
+                    <option value="light">Light Mode</option>
+                    <option value="dark">Dark Mode</option>
+                </select>
             </div>
         </div>
     </div>
@@ -635,14 +755,11 @@
     <nav class="navbar navbar-dark main-navbar py-2 sticky-top">
         <div class="container d-flex justify-content-between align-items-center">
 
-            <!-- ================= APKA LOGO YAHAN HAI ================= -->
             <a class="navbar-brand fw-bold fs-4 text-white d-flex align-items-center" href="#">
                 <img src="logo.png" alt="Sureksha Vision Logo"
                     style="height: 40px; width: auto; margin-right: 10px; border-radius: 4px;">
                 SUREKSHA <span style="color: #fff; font-weight: 300; margin-left: 5px;">VISION</span>
             </a>
-            <!-- ================= LOGO SECTION END ================= -->
-
             <div class="d-flex align-items-center gap-2">
                 <span
                     class="badge bg-dark border border-secondary text-light d-none d-lg-inline-flex align-items-center gap-2 small">
@@ -1255,16 +1372,18 @@
             </div>
         </div>
         <div class="chatbot-options" id="chatOptions" style="display:none;">
-            <button class="chat-btn-opt" onclick="handleIntentQuery('Naya CCTV Camera lagwana hai')">Naya CCTV Camera
-                lagwana hai</button>
-            <button class="chat-btn-opt"
-                onclick="handleIntentQuery('Purana CCTV kharab hai / Repair service chahiye')">Purana CCTV kharab hai /
+            <button class="chat-btn-opt" onclick="handleIntentQuery('CCTV Camera Installation / Repair')">CCTV / Camera
+                Setup</button>
+            <button class="chat-btn-opt" onclick="handleIntentQuery('EPABX Intercom Systems')">Intercom / EPABX
+                Setup</button>
+            <button class="chat-btn-opt" onclick="handleIntentQuery('Networking & POE Setup')">Networking / WiFi
+                Setup</button>
+            <button class="chat-btn-opt" onclick="handleIntentQuery('Computer & Laptop Repair')">Laptop / PC
                 Repair</button>
-            <button class="chat-btn-opt" onclick="handleIntentQuery('EPABX Intercom System setup wiring help')">Intercom
-                / EPABX Setup</button>
-            <button class="chat-btn-opt"
-                onclick="handleIntentQuery('Laptop / Computer Repair software boost hardware fix')">Laptop / PC
-                Repair</button>
+            <button class="chat-btn-opt" onclick="handleIntentQuery('Electrical & Electronic Work')">Electrical &
+                Electronic Work</button>
+            <button class="chat-btn-opt" onclick="handleIntentQuery('Custom Website Design')">Custom Website
+                Design</button>
         </div>
         <div class="chatbot-input-area">
             <input type="text" id="chatUserInput" placeholder="Apna naam likhein..."
@@ -1287,6 +1406,69 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script type="text/javascript">
+        // ================= DYNAMIC RANDOM THEME GENERATOR (ON REFRESH ONLY) =================
+        function applyRandomTheme() {
+            const themes = [
+                { primary: '#0f172a', accent: '#0284c7', glow: '#f59e0b' },
+                { primary: '#064e3b', accent: '#10b981', glow: '#fbbf24' },
+                { primary: '#2e1065', accent: '#8b5cf6', glow: '#f472b6' },
+                { primary: '#450a0a', accent: '#ef4444', glow: '#fca5a5' },
+                { primary: '#083344', accent: '#0ea5e9', glow: '#38bdf8' },
+                { primary: '#171717', accent: '#d97706', glow: '#fef08a' }
+            ];
+            const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+            document.documentElement.style.setProperty('--primary-dark', randomTheme.primary);
+            document.documentElement.style.setProperty('--accent-blue', randomTheme.accent);
+            document.documentElement.style.setProperty('--glow-yellow', randomTheme.glow);
+        }
+
+        // ================= DARK / LIGHT MODE LOGIC (DROPDOWN) =================
+        function setThemeMode(mode) {
+            const htmlEl = document.documentElement;
+            htmlEl.setAttribute('data-theme', mode);
+            localStorage.setItem('sureksha-theme', mode);
+            updateThemeUI(mode);
+        }
+
+        function initThemeMode() {
+            // Check saved theme or default to light
+            const savedTheme = localStorage.getItem('sureksha-theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+
+            // Set dropdown value
+            const themeDropdown = document.getElementById('theme-switcher');
+            if (themeDropdown) {
+                themeDropdown.value = savedTheme;
+            }
+
+            updateThemeUI(savedTheme);
+        }
+
+        function updateThemeUI(theme) {
+            const icon = document.getElementById('theme-icon');
+            if (icon) {
+                if (theme === 'dark') {
+                    icon.className = 'fa-solid fa-moon text-info';
+                } else {
+                    icon.className = 'fa-solid fa-sun text-warning';
+                }
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initThemeMode();
+            applyRandomTheme(); // Applies one random color theme on page load/refresh
+
+            if (!sessionStorage.getItem('greeted')) {
+                setTimeout(() => {
+                    var myModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+                    myModal.show();
+                    sessionStorage.setItem('greeted', 'true');
+                }, 1000);
+            }
+            startBackgroundRotator();
+        });
+
         // ================= SERVICE DEMO POPUP LOGIC WITH SLIDER AND PERSUASIVE MESSAGES =================
         const serviceDemos = {
             cctv: {
@@ -1385,23 +1567,6 @@
             demoModal.show();
         }
 
-        // ================= DYNAMIC RANDOM THEME GENERATOR =================
-        function applyRandomTheme() {
-            const themes = [
-                { primary: '#0f172a', accent: '#0284c7', glow: '#f59e0b' },
-                { primary: '#064e3b', accent: '#10b981', glow: '#fbbf24' },
-                { primary: '#2e1065', accent: '#8b5cf6', glow: '#f472b6' },
-                { primary: '#450a0a', accent: '#ef4444', glow: '#fca5a5' },
-                { primary: '#083344', accent: '#0ea5e9', glow: '#38bdf8' },
-                { primary: '#171717', accent: '#d97706', glow: '#fef08a' }
-            ];
-            const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-            document.documentElement.style.setProperty('--primary-dark', randomTheme.primary);
-            document.documentElement.style.setProperty('--accent-blue', randomTheme.accent);
-            document.documentElement.style.setProperty('--glow-yellow', randomTheme.glow);
-        }
-        applyRandomTheme();
-
         // ================= ADVANCED FESTIVAL THEME ENGINE =================
         function applyFestiveTheme() {
             const today = new Date();
@@ -1472,17 +1637,6 @@
                 heroSection.style.backgroundImage = `url('${heroImages[currentImgIndex]}')`;
             }, 5000);
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            if (!sessionStorage.getItem('greeted')) {
-                setTimeout(() => {
-                    var myModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
-                    myModal.show();
-                    sessionStorage.setItem('greeted', 'true');
-                }, 1000);
-            }
-            startBackgroundRotator();
-        });
 
         function updateDailyGreeting(lang) {
             const todayIndex = new Date().getDay();
@@ -1688,16 +1842,30 @@
 
         function generateBotReply(lowerText) {
             const lower = lowerText.toLowerCase();
+
             if (lower.includes('cctv') || lower.includes('camera')) {
-                return "Hum Analog High-Definition aur Advanced PoE IP Cameras lagate hain. Fix charge ₹300-₹400 per camera hai. Humne details aapki submit kar li hai.";
-            } else if (lower.includes('intercom') || lower.includes('epabx')) {
-                return "Hum safe routing wiring ke sath multi-line EPABX intercom systems apartments ke liye setup karte hain. Hamari team aapse turat sampark karegi.";
-            } else if (lower.includes('price') || lower.includes('rate') || lower.includes('paisa') || lower.includes('daam')) {
-                return "Humara rate clear hai: Analog camera: ₹300, IP/PoE Setup: ₹400, System Configuration: ₹500. Koi hidden charge nahi hai.";
-            } else if (lower.includes('repair') || lower.includes('laptop') || lower.includes('computer')) {
+                return "Hum Analog High-Definition aur Advanced PoE IP Cameras lagate hain. Fix charge ₹300-₹400 per camera hai. Humari team aapse jald hi sampark karegi.";
+            }
+            else if (lower.includes('intercom') || lower.includes('epabx')) {
+                return "Hum safe routing wiring ke sath multi-line EPABX intercom systems apartments ke liye setup karte hain. Hamari team aapse turant sampark karegi.";
+            }
+            else if (lower.includes('network') || lower.includes('wifi') || lower.includes('poe')) {
+                return "Heavy networks ke liye static IP settings aur high-quality POE switches setup hum karte hain. Details register ho gayi hain.";
+            }
+            else if (lower.includes('repair') || lower.includes('laptop') || lower.includes('computer') || lower.includes('pc')) {
                 return "Hum doorstep computer hardware repairs, speed troubleshooting (RAM/SSD upgrade), aur safe malware cleanings karte hain.";
             }
-            return "Aapki requirement hamare paas securely register ho gayi hai! 🚀 Hamare certified expert network engineer jald hi aapse contact karenge.";
+            else if (lower.includes('electric') || lower.includes('wire') || lower.includes('electronic')) {
+                return "Humare certified electricians short-circuit fixing se lekar nayi wiring, panel setup, aur electronic gadgets repair karte hain.";
+            }
+            else if (lower.includes('website') || lower.includes('web')) {
+                return "Hum School, College, Shop, aur Business ke liye fast, modern aur Google-friendly website design karte hain. Humari team aapko jald call karegi.";
+            }
+            else if (lower.includes('price') || lower.includes('rate') || lower.includes('paisa') || lower.includes('daam')) {
+                return "Humara rate clear hai: Analog camera: ₹300, IP/PoE Setup: ₹400, System Configuration: ₹500. Koi hidden charge nahi hai.";
+            }
+
+            return "Aapki requirement hamare paas securely register ho gayi hai! 🚀 Hamare expert jald hi aapse contact karenge.";
         }
 
         const translations = {
@@ -1714,7 +1882,7 @@
                 btnWa: '<i class="fa-brands fa-whatsapp me-2"></i> WhatsApp Message',
                 aboutSub: 'Hamare Bare Mein',
                 aboutTitle: 'Technical Expertise Aur Deep Problem-Solving',
-                aboutDesc1: 'Sureksha Vision ek B.Tech graduate ke netritva me chalne wali high-end technical enterprise hai. Hum sirf cameras fit nahi সীম करते, balki computer hardware troubleshooting, complex server routing, cybersecurity infrastructure aur industrial electrical networks ke deep implementation ko handle karte hain.',
+                aboutDesc1: 'Sureksha Vision ek B.Tech graduate ke netritva me chalne wali high-end technical enterprise hai. Hum sirf cameras fit nahi karte, balki computer hardware troubleshooting, complex server routing, cybersecurity infrastructure aur industrial electrical networks ke deep implementation ko handle karte hain.',
                 aboutDesc2: 'Hum bade multi-apartment housings aur commercial complexes me DHCP failure hone par automatic system downtime se bachane ke liye safe Static IP network deployment karne me expert hain.',
                 aboutCardtitle: 'B.Tech Led Team',
                 aboutCarddesc: 'High-level analytical skills aur enterprise infrastructure solutions.',
