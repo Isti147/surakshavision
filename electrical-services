@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical & Electronic Repair - Suraksha Vision</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <a href="index.html">
+            <img src="logo.png" alt="Suraksha Vision Logo" class="site-logo">
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">Billing Panel</a>
+            <a href="tel:+910000000000">📞 Call Us</a>
+        </div>
+    </header>
+
+    <!-- Electrical & Electronics Content -->
+    <div class="container">
+        <div class="service-details">
+            <h2>⚡ Electrical & Electronic Hardware Repair</h2>
+
+            <img src="electrical-large-banner.jpg" alt="Electrical and Electronic Repair"
+                style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px;">
+
+            <div class="pricing-box">
+                <h3>Our Core Services:</h3>
+                <ul>
+                    <li>Deep Troubleshooting of Electronic Hardware</li>
+                    <li>Power Supply & UPS/Inverter Repair</li>
+                    <li>Circuit Board & Component Level Repair</li>
+                    <li>General Electrical Fault Finding</li>
+                </ul>
+            </div>
+
+            <h3>Expert Hardware Troubleshooting</h3>
+            <p>Chahe koi basic electrical fault ho ya complex electronic circuit ka issue, humare paas hardware
+                troubleshooting ka deep experience hai. Hum problem ki root cause ko find karke usko permanently fix
+                karte hain.</p>
+
+            <a href="tel:+910000000000"
+                style="display:inline-block; margin-top:20px; padding:10px 20px; background:#0d47a1; color:white; text-decoration:none; border-radius:5px;">Book
+                a Technician</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Suraksha Vision CCTV / IT Solution. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
